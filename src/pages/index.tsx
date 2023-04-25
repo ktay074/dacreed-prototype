@@ -1,6 +1,7 @@
 import { SignInButton, useUser, SignOutButton } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 
 import { api } from "~/utils/api";
 import type {RouterOutputs} from "~/utils/api"
@@ -9,6 +10,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime"
 import Image from 'next/image';
 import { LoadingPage } from "../components/loading";
+import upload from "./upload";
 import { useState } from "react";
 
 dayjs.extend(relativeTime);
@@ -32,12 +34,13 @@ const CreatePostWizard = () => {
 
   return (
   <div className="flex gap-3 w-full">
+    <Link href="/upload">
     <Image src={user.profileImageUrl} 
     className="w-14 h-14 rounded-full"
     alt="your profilr picture"
     width={56}
     height={56}
-    />
+    /></Link>
     <input placeholder="Type some emojis!" 
     className="grow bg-transparent outline-none"
     type="text"
