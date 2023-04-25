@@ -50,7 +50,7 @@ return (
                 post.createdAt
                 ).fromNow()}`}</span> 
                 </div>
-              <span>{post.content}</span>
+              <span className="text-xl">{post.content}</span>
               </div>
             </div>
 )
