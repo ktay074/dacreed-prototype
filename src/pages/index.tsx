@@ -1,4 +1,4 @@
-import { SignInButton, useUser } from "@clerk/nextjs";
+import { SignInButton, useUser, SignOutButton } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Head from "next/head";
 
@@ -17,7 +17,14 @@ const CreatePostWizard = () => {
   const {user} = useUser();
   const [input, setInput] = useState("")
 
-  const {mutate} = api.posts.create.useMutation();
+  const ctx = api.useContext();
+
+  const {mutate, isLoading: isPosting} = api.posts.create.useMutation({
+    onSuccess: () => {
+      setInput("");
+      ctx.posts.getAll.invalidate();
+    }
+  });
 
   console.log(user)
 
@@ -36,6 +43,7 @@ const CreatePostWizard = () => {
     type="text"
     value={input}
     onChange={(e) => setInput(e.target.value)}
+    disabled={isPosting}
     />
     <button onClick={() => mutate({ content: input})}>Post</button>
   </div>)
@@ -107,7 +115,10 @@ const Home: NextPage = () => {
             )}
           {isSignedIn && <CreatePostWizard/>}
         </div>
+        <div>
         <Feed/>
+        </div>
+        <SignOutButton/>
         </div>
       </main>
     </>
