@@ -11,6 +11,7 @@ import {
 } from "~/server/api/trpc";
 
 const filterUserForClient = (user: User) => {
+  console.log(user)
     return{
         id: user.id, 
         username: user.username, 
@@ -60,13 +61,14 @@ create: privateProcedure
 .input(
     z.object({
         content: z.string().min(1).max(500)
+    
     })
 ).mutation(async ({ ctx, input }) => {
     const authorId = ctx.userId;
 
     const post = await ctx.prisma.post.create({
       data: {
-        authorId,
+        authorId: authorId ?? "",
         content: input.content,
       },
     });

@@ -1,15 +1,51 @@
 import Link from 'next/link';
 import Slider from '~/components/slider';
-import uploadbackground from '../images/uploadbackground.svg'
+import { api } from "~/utils/api";
+import { useState } from 'react';
+import type {RouterOutputs} from "~/utils/api"
 
 export default function UploadPage() {
+const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
+
+
+const handleDrop = async  (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+
+    // Set the dropped files to state
+    setDroppedFiles(Array.from(files));
+    const ctx = api.useContext();
+    // Call the API to save the files to the database
+    await api.document.create.useMutation({
+        onSuccess: () => {
+          setDroppedFiles([]);
+          ctx.document.getAll.invalidate()
+        }
+      })
+}
+
+
   return (
     <div className=' sm:my-10 md:mx-32 '>
       <div className='flex' >
-        <div className="m-10 bg-indigo-500 text-slate-100 rounded-full flex flex-col justify-center items-center w-2/4">
+        <div 
+        className="m-10 bg-indigo-500 text-slate-100 rounded-full flex flex-col justify-center items-center w-2/4"
+        onDrop={handleDrop} 
+        onDragOver={(e)=>e.preventDefault()}
+        >
+             {droppedFiles.length === 0 ? (
+          <div className="text-center">
             <p className='mb-5 text-xl'>Drag and drop files here</p>
             <p className='text-2xl underline'>Click to Upload</p>
             <p className='text-base underline pt-10'>How to?</p>
+            </div>
+        ) : (
+          <ul>
+            {droppedFiles.map((file) => (
+              <li key={file.name}>{file.name}</li>
+            ))}
+          </ul>
+        )}
         </div>
         <div className='flex flex-col w-2/4 mb-20'>
             <h1 className='font-bold text-5xl pb-10'>Course Name</h1>
@@ -19,7 +55,9 @@ export default function UploadPage() {
             <Slider />
             <Slider />
             <div className='w-4/5 flex flex-col '>
+            <Link href="/coursepage">
             <button className='text-2xl text-slate-100 bg-indigo-700 rounded-3xl px-4 py-2 mt-5 w-2/4 self-end'>Generate</button>
+            </Link>
             <div className='w-full bg-red-200'></div>
             </div>
         </div>
