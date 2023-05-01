@@ -10,9 +10,19 @@ datasource db {
 model Post {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  
   content   String
   authorId  String
 
   @@index([authorId])
 }
+
+model Document {
+  id        String   @id
+  createdAt DateTime @default(now())
+  content   String
+  authorId  String
+  file      Bytes
+
+  @@index([authorId])
+}
+
