@@ -9,7 +9,7 @@ interface ButtonProps {
 const PrimaryButton = ({ title, isActive, onClick }: PropsWithChildren<ButtonProps>) => {
   return (
     <button
-      className={`mx-4 text-xl font-bold  border-indigo-200 border-2 py-2 px-7 mb-2 rounded-3xl ${
+      className={`mx-4 text-xl font-bold  border-2 py-2 px-7 mb-2 rounded-3xl ${
         isActive ? "bg-indigo-300" : "bg-indigo-500"
       }`}
       onClick={onClick}
