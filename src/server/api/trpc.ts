@@ -30,10 +30,12 @@ export const createTRPCContext = (opts: CreateNextContextOptions) => {
   const sesh = getAuth(req);
 
   const userId = sesh.userId;
+  const id = req.body;
 
   return {
     prisma,
     userId,
+    id,
     req,
   };
 };
@@ -50,6 +52,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 import { getAuth } from "@clerk/nextjs/server";
 import { TRPCError } from "@trpc/server";
+
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
@@ -102,4 +105,5 @@ const enforceUserIsAuthed = t.middleware(async({ctx, next}) => {
   })
 })
 
-export const privateProcedure = t.procedure.use(enforceUserIsAuthed)
+export const privateProcedure = t.procedure
+  .use(enforceUserIsAuthed)

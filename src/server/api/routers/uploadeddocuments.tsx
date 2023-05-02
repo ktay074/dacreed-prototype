@@ -40,20 +40,6 @@ export const documentRouter = createTRPCRouter({
         })
     )
     .mutation(async ({ ctx, input }) => {
-        const authorId = ctx.userId;
-
-        // Get the file data from the request
-        const file = await ctx.req.file('file');
-
-        // Save the file data to the database
-        const document = await ctx.prisma.document.create({
-            data: {
-                content: input.content,
-                authorId: authorId ?? "",
-                file: file?.buffer,
-            },
-        });
-
-        return document;
+    
     }),
 });

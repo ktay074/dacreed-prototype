@@ -10,16 +10,15 @@ datasource db {
 model Post {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  
   content   String
   authorId  String
 
   @@index([authorId])
 }
+
 model Document {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  
   content   String
   authorId  String
   file      Bytes
@@ -27,13 +26,44 @@ model Document {
   @@index([authorId])
 }
 
-model Note {
+model User {
+  id        String   @id
+  createdAt DateTime @default(now())
+  username  String
+  courses Course[]
+
+  @@index([id])
+}
+
+model Course {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  
-  title     String
-  content   String
+  updatedAt DateTime @default(now())
   authorId  String
+  title     String
+  duration  DateTime
+  passValue Int @default(80)
+  nodes Node[]
+  users User[]
+  
+  @@index([title])
+}
 
-  @@index([authorId])
+model Node {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  courseId      String
+  course        Course   @relation(fields: [courseId], references: [id])
+  title       String
+  description String
+  learningPrefs LearningPref[]
+
+  @@index([title])
+}
+model LearningPref {
+  id          String @id @default(cuid())
+  name        String
+  node        Node   @relation(fields: [nodeId], references: [id])
+  nodeId      String
 }
