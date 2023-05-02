@@ -102,6 +102,8 @@ const Home: NextPage = () => {
 
   const {data} = api.posts.getAll.useQuery();
 
+  const getUser = api.findUser.getUser.useQuery({ text:  }); 
+  
   if (!userLoaded) return <div/>
 
 
@@ -149,7 +151,9 @@ const Home: NextPage = () => {
               </div>
             </Link>
             
-            
+            <div>
+
+            </div>
           </div>
 
         </div>

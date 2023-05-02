@@ -26,3 +26,37 @@ model Document {
   @@index([authorId])
 }
 
+model User {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  username  String
+
+  @@index([id])
+}
+
+model Course {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  authorId  String
+  title     String
+  test      String
+  duration  DateTime
+  passValue Int      @default(80)
+
+  @@index([title])
+}
+
+model Node {
+  id          String   @id
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  courseId    String
+  userId      String
+  title       String
+  description String
+  visual      Bytes?
+  auditory    Bytes?
+
+  @@index([title])
+}
