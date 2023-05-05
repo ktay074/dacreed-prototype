@@ -25,13 +25,14 @@ const RightMainMenu: React.FC<RightMainMenuProps> = ({ isRightMenuOpen, toggleRi
         }
     }
     const handleDownloadTxtNotepad = () => {
-        const confirmed = window.confirm("Are you sure you want to download as .txt?");
-        if(confirmed) {
+      
+  const filename = prompt("Please enter the filename for the PDF", "notepad.pdf");
+        if(filename) {
         const blob = new Blob([notepadInput], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'notepad.txt';
+        link.download = filename;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -40,15 +41,16 @@ const RightMainMenu: React.FC<RightMainMenuProps> = ({ isRightMenuOpen, toggleRi
       };
       
       const handleDownloadPDFNotepad = () => {
-        const confirmed = window.confirm("Are you sure you want to download as .pdf?");
-        if (confirmed) {
+        
+  const filename = prompt("Please enter the filename for the PDF", "notepad.pdf");
+        if (filename) {
             const pdf = new jsPDF();
             pdf.text(notepadInput, 10, 10); // Add text to the PDF document
             const pdfBlob = pdf.output('blob'); // Generate the PDF blob
             const url = URL.createObjectURL(pdfBlob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = 'notepad.pdf';
+            link.download = filename;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
