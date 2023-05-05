@@ -4,9 +4,13 @@ import { api } from "~/utils/api";
 import { useState } from 'react';
 import type {RouterOutputs} from "~/utils/api"
 
+import { LoadingPage } from '~/components/loading';
+
+
 export default function UploadPage() {
 const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
 
+const ctx = api.useContext();
 
 const handleDrop = async  (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -14,14 +18,14 @@ const handleDrop = async  (e: React.DragEvent<HTMLDivElement>) => {
 
     // Set the dropped files to state
     setDroppedFiles(Array.from(files));
-    const ctx = api.useContext();
+    console.log(files)
     // Call the API to save the files to the database
-    await api.document.create.useMutation({
-        onSuccess: () => {
-          setDroppedFiles([]);
-          ctx.document.getAll.invalidate()
-        }
-      })
+  //   api.document.create.useMutation({
+  //   onSuccess: () => {
+  //     setDroppedFiles([]);
+  //     ctx.document.getAll.invalidate();
+  //   }
+  // })
 }
 
 

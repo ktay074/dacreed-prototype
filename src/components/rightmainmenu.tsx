@@ -3,6 +3,7 @@ import {
 PencilIcon,
 TrashIcon,
 ArrowDownTrayIcon } from '@heroicons/react/24/solid';
+import jsPDF from "jspdf";
 
 interface RightMainMenuProps {
     isRightMenuOpen: boolean;
@@ -11,6 +12,7 @@ interface RightMainMenuProps {
 
 const RightMainMenu: React.FC<RightMainMenuProps> = ({ isRightMenuOpen, toggleRightMenu }) => {
     const [notepadInput, setNotepadInput] = useState('');
+    const [downloadNotepadType, setDownloadNotepadType] = useState(false);
 
     const handleTextInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setNotepadInput(event.target.value);
@@ -22,8 +24,8 @@ const RightMainMenu: React.FC<RightMainMenuProps> = ({ isRightMenuOpen, toggleRi
           setNotepadInput("");
         }
     }
-    const handleDownloadNotepad = () => {
-        const confirmed = window.confirm("Are you sure you want to download your Notepad?");
+    const handleDownloadTxtNotepad = () => {
+        const confirmed = window.confirm("Are you sure you want to download as .txt?");
         if(confirmed) {
         const blob = new Blob([notepadInput], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
@@ -37,6 +39,25 @@ const RightMainMenu: React.FC<RightMainMenuProps> = ({ isRightMenuOpen, toggleRi
         }
       };
       
+      const handleDownloadPDFNotepad = () => {
+        const confirmed = window.confirm("Are you sure you want to download as .pdf?");
+        if (confirmed) {
+            const pdf = new jsPDF();
+            pdf.text(notepadInput, 10, 10); // Add text to the PDF document
+            const pdfBlob = pdf.output('blob'); // Generate the PDF blob
+            const url = URL.createObjectURL(pdfBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'notepad.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    };
+    const handleDownloadNotepad = () => {
+        setDownloadNotepadType(!downloadNotepadType)
+    }
 
     return (
         
@@ -61,10 +82,15 @@ You’ll be able to view them for the duration of this course, or you can downlo
             <div className='flex'>
                 <ArrowDownTrayIcon className='w-4 cursor-pointer'
             onClick={handleDownloadNotepad} />
+            
                 <TrashIcon className='w-4 cursor-pointer'
             onClick={handleClearNotepad}
                 />
             </div>
+        </div>
+        <div className={`flex justify-around ${downloadNotepadType ? 'block' : 'hidden'}`}>
+          <button className="" onClick={handleDownloadTxtNotepad}>Txt</button>
+          <button className="" onClick={handleDownloadPDFNotepad}>PDF</button>
         </div>
         <textarea
                   className="w-full h-full p-4 outline-none"

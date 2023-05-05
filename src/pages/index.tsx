@@ -100,7 +100,6 @@ const Home: NextPage = () => {
 
   if (!userLoaded) return <div/>
 
-
   return (
     <>
       <Head>

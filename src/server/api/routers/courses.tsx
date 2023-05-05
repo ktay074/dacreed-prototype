@@ -16,12 +16,9 @@ export const coursesRouter = createTRPCRouter({
       },
     });
 
-    const coursesWithNodes = courses.map((course) => {
-      const nodes = course.nodes.map((node) => node.description);
-      return { ...course, nodes };
-    });
 
-    return coursesWithNodes;
+
+    return courses;
   }),
 
   getById: publicProcedure.query<{id: string}>(async ({ ctx }) => {

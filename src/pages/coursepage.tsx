@@ -17,6 +17,7 @@ import { PrimaryButton, SecondaryButton} from '~/components/button'
 const CourseInfoPage: React.FC = () => {
   const [isLeftMenuOpen, setIsLeftMenuOpen] = useState(true);
   const [isRightMenuOpen, setIsRightMenuOpen] = useState(false);
+  const [courseTitle, setCourseTitle] = useState("");
 
   const toggleLeftMenu = () => {
     setIsLeftMenuOpen(!isLeftMenuOpen);
@@ -29,22 +30,25 @@ const CourseInfoPage: React.FC = () => {
 
   const CourseView = (props: CourseWithNodes[number]) => {
     const course = props;
-    return (
-      <div 
-        className="p-4 border-b border-slate-400 flex gap-3" 
-        key={course.id}
-      >
+  
+    if (course.title === "course 1") {
+      setCourseTitle(course.title);
+      return (
         <div className="flex flex-col">
-          <span className="text-xl">{course.title}</span>
           {course.nodes.map((node, index) => (
-          <div key={index}><div className="container">
-          {React.createElement("span", {}, node)}
-        </div></div>
-        ))}
+            <div key={index}>
+              <div className="container">
+                <Sections title={node.title} description={node.description} />
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-    )
-  }
+      );
+    }
+  
+    return null;
+  };
+  
   
 
   const ShowCourse = () => {
@@ -53,7 +57,12 @@ const CourseInfoPage: React.FC = () => {
     if (coursesLoading) return <LoadingPage/>;
     
     if (!data) return <div>Something went wrong!</div>;
+
+    if (localStorage.getItem('course title') === null){
+        localStorage.setItem('course title', courseTitle)
+    }
     
+    console.log("course data" , data)
     return (
         <div className="flex flex-col">
           {data.map((fullCourse) => fullCourse && (
@@ -86,13 +95,9 @@ const CourseInfoPage: React.FC = () => {
 
       {/* Course Info */}
       <div className="col-span-8 bg-gray-100">
-        <h1 className="text-3xl font-bold mb-4 text-center">Course Title</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center">{courseTitle}</h1>
         <div className='border-2 border-black'>
-        <Sections title={"[Section1]"} description={'this a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a description'}/>
-        <Sections title={"[Section2]"} description={'this a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a description'}/>
-        <Sections title={"[Section3]"} description={'this a description this a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a description'}/>
-        <Sections title={"[Section4-test]"} description={'this a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a descriptionthis a description'}/>
-        <ShowCourse/>
+       <ShowCourse/>
         </div>
           </div>
               {/* Right Menu */}

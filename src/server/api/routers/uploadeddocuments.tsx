@@ -8,19 +8,11 @@ import {
 } from "~/server/api/trpc";
 import type { NextApiRequest } from 'next';
 
-interface CustomContext {
-  prisma: typeof prisma;
-  userId: string | null;
-  session: string;
-  req: NextApiRequest;
-}
-
 export const documentRouter = createTRPCRouter({
 
   getAll: publicProcedure.query(async ({ ctx }) => {
     const documents = await ctx.prisma.document.findMany({
         take: 100,
-        orderBy: [{createdAt: "desc"}]
     });
 
     return documents.map((document) => {
@@ -36,10 +28,18 @@ export const documentRouter = createTRPCRouter({
   create: privateProcedure
     .input(
         z.object({
-            content: z.string()
+            org_Content: z.string(),
+            org_DateTime: z.date()
         })
     )
     .mutation(async ({ ctx, input }) => {
-    
+      const document = await ctx.prisma.content.create({
+        data: {
+          org_DateTime: input.org_DateTime,
+          org_Content: input.org_Content,
+        },
+      });
+  
+      return document;
     }),
 });

@@ -20,8 +20,7 @@ model Document {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   content   String
-  authorId  String
-  file      Bytes
+  authorId  String @default("authorId")
 
   @@index([authorId])
 }
@@ -66,4 +65,26 @@ model LearningPref {
   name        String
   node        Node   @relation(fields: [nodeId], references: [id])
   nodeId      String
+}
+
+model Events {
+  id          String @id @default(cuid())
+  timeZone String
+  region String
+  country String
+  page String
+  timeSpent Int
+  scrolling Int
+  mouseClicks Int
+  buttonClicks Int
+  linkClicks Int
+  mouseMoveInt Int
+  keyClicks Int
+}
+model Content {
+  id          String @id @default(cuid())
+  org_DateTime DateTime
+  org_Content String
+  gen_Content String?
+  org_Creator String?
 }
