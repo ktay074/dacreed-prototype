@@ -26,20 +26,26 @@ export const documentRouter = createTRPCRouter({
 
   
   create: privateProcedure
-    .input(
-        z.object({
-            org_Content: z.string(),
-            org_DateTime: z.date()
-        })
-    )
-    .mutation(async ({ ctx, input }) => {
-      const document = await ctx.prisma.content.create({
-        data: {
-          org_DateTime: input.org_DateTime,
-          org_Content: input.org_Content,
-        },
-      });
+  .input(
+      z.object({
+        simplicityPref: z.array(z.number()),
+        humourPref: z.array(z.number()),
+        professionalismPref: z.array(z.number()),
+      })
+  )
+  .mutation(async ({ ctx, input }) => {
+    const coursePref = await ctx.prisma.coursePref.create({
+      data: {
+        simplicityPref: { set: input.simplicityPref },
+        humourPref: { set: input.humourPref },
+        proffesionalismPref: { set: input.professionalismPref }
+      },
+    });
+
+    return coursePref;
+  }),
+
+
   
-      return document;
-    }),
+
 });

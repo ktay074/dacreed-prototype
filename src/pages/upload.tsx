@@ -14,6 +14,11 @@ const [humourPreference, sethumorPreference] = useState([1])
 const [simplicityPreference, setSimplicityPreference] = useState([1])
 
 const ctx = api.useContext();
+const {mutate, isLoading: isSavingPreferences} = api.document.create.useMutation({
+  onSuccess: () => {
+    ctx.courses.getAll.invalidate();
+  }
+});
 
 const handleSimplicityChange = (newSimplicityValue: number[]) => {
   setSimplicityPreference(newSimplicityValue);
@@ -31,10 +36,18 @@ const handleSavePreferences = () => {
   const humourPref: string = humourPreference.toString();
   const professionalismPref: string = professionalPreference.toString();
 
+
     localStorage.setItem("Simplicity Preference", simplicityPref)
     localStorage.setItem("Humour Preference", humourPref)
     localStorage.setItem("Proffesionalism Preference", professionalismPref)
-  
+
+      // should contain the created CoursePref object
+
+      return (
+        <div className="flex gap-3 w-full">
+          <button onClick={() => mutate({ simplicityPref: simplicityPreference, humourPref: humourPreference, professionalismPref: professionalPreference})}>Post</button>
+        </div>)
+
 };
 
 const handleDrop = async  (e: React.DragEvent<HTMLDivElement>) => {
@@ -108,7 +121,7 @@ droppedFiles.forEach((file) => {
 
             <button 
             className='text-2xl text-slate-100 bg-indigo-700 rounded-3xl px-4 py-2 mt-5 w-2/4 self-end'
-            onClick={handleSavePreferences}
+            onClick={() => mutate({ simplicityPref: simplicityPreference, humourPref: humourPreference, professionalismPref: professionalPreference})}
             >Save Preferences</button>
             <div className='w-full bg-red-200'></div>
             </div>

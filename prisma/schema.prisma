@@ -81,10 +81,10 @@ model Events {
   mouseMoveInt Int
   keyClicks Int
 }
-model Content {
+model CoursePref {
   id          String @id @default(cuid())
-  org_DateTime DateTime
-  org_Content String
-  gen_Content String?
-  org_Creator String?
+  simplicityPref Int[]   @default([])
+  humourPref Int[]   @default([])
+  proffesionalismPref Int[]   @default([])
+
 }
