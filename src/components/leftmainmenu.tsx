@@ -3,13 +3,13 @@ import {
     InformationCircleIcon } from '@heroicons/react/24/solid';
 
 import { PrimaryButton} from '~/components/button'
+import Image from "next/image";
 
 interface LeftMainMenuProps {
     isLeftMenuOpen: boolean;
-    toggleLeftMenu: () => void;
   }
 
-const RightMainMenu: React.FC<LeftMainMenuProps> = ({ isLeftMenuOpen, toggleLeftMenu }) => {
+const RightMainMenu: React.FC<LeftMainMenuProps> = ({ isLeftMenuOpen }) => {
     const [activeButton, setActiveButton] = useState('');
       
     const handleButtonClick = (buttonTitle: string) => {
@@ -25,7 +25,7 @@ const RightMainMenu: React.FC<LeftMainMenuProps> = ({ isLeftMenuOpen, toggleLeft
      {/* Left Menu Content */}
      <div className="w-full bg-indigo-50  h-full ">
      <div className='px-4'>
-         <img src='' alt=''></img>
+         <Image src='' alt=''></Image>
          <h3>Hi, Saskia</h3>
      </div>
      <div className='px-4'>

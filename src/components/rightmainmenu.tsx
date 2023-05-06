@@ -7,10 +7,9 @@ import jsPDF from "jspdf";
 
 interface RightMainMenuProps {
     isRightMenuOpen: boolean;
-    toggleRightMenu: () => void;
   }
 
-const RightMainMenu: React.FC<RightMainMenuProps> = ({ isRightMenuOpen, toggleRightMenu }) => {
+const RightMainMenu: React.FC<RightMainMenuProps> = ({ isRightMenuOpen }) => {
     const [notepadInput, setNotepadInput] = useState('');
     const [downloadNotepadType, setDownloadNotepadType] = useState(false);
 

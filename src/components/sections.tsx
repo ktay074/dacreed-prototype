@@ -2,7 +2,6 @@ import React, {useState} from "react";
 
 import { 
     ChevronDownIcon,
-    ChevronUpDownIcon,
     ChevronUpIcon
 } from '@heroicons/react/24/solid';
 

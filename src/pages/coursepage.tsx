@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { 
     ChevronLeftIcon, 
-    ChevronRightIcon, 
-    InformationCircleIcon } from '@heroicons/react/24/solid';
+    ChevronRightIcon} from '@heroicons/react/24/solid';
 
 import type {RouterOutputs} from "~/utils/api"
 import { api } from "~/utils/api";
@@ -11,8 +10,6 @@ import { api } from "~/utils/api";
     import LeftMainMenu from '~/components/leftmainmenu'
     import Sections from '~/components/sections';
     import { LoadingPage } from "../components/loading";
-
-import { PrimaryButton, SecondaryButton} from '~/components/button'
 
 const CourseInfoPage: React.FC = () => {
   const [isLeftMenuOpen, setIsLeftMenuOpen] = useState(true);
@@ -79,7 +76,7 @@ const CourseInfoPage: React.FC = () => {
       {/* Left Menu */}
       <div className='col-span-2 flex'>
         
-<LeftMainMenu isLeftMenuOpen={isLeftMenuOpen} toggleLeftMenu={toggleLeftMenu}/>
+<LeftMainMenu isLeftMenuOpen={isLeftMenuOpen} />
         {/* Left Menu Toggle Button */}
         <button
           className={` h-10 p-1 mt-20 bg-amber-400  rounded-r text-slate-200 `}
@@ -114,7 +111,7 @@ const CourseInfoPage: React.FC = () => {
       )}
     </button>
   
-    <RightMainMenu isRightMenuOpen={isRightMenuOpen} toggleRightMenu={toggleRightMenu} />
+    <RightMainMenu isRightMenuOpen={isRightMenuOpen}  />
 
     
   </div>
