@@ -2,9 +2,6 @@ import Link from 'next/link';
 import Slider from '~/components/slider';
 import { api } from "~/utils/api";
 import { useState } from 'react';
-import type {RouterOutputs} from "~/utils/api"
-
-import { LoadingPage } from '~/components/loading';
 
 
 export default function UploadPage() {
@@ -14,9 +11,9 @@ const [humourPreference, sethumorPreference] = useState([1])
 const [simplicityPreference, setSimplicityPreference] = useState([1])
 
 const ctx = api.useContext();
-const {mutate, isLoading: isSavingPreferences} = api.document.create.useMutation({
+const {mutate} = api.document.create.useMutation({
   onSuccess: () => {
-    ctx.courses.getAll.invalidate();
+    void ctx.courses.getAll.invalidate();
   }
 });
 
@@ -31,24 +28,24 @@ const handleProfessionalismChange = (newProffesionalismValue: number[]) => {
   setProfessionalPreference(newProffesionalismValue);
 };
 
-const handleSavePreferences = () => {
-  const simplicityPref: string = simplicityPreference.toString();
-  const humourPref: string = humourPreference.toString();
-  const professionalismPref: string = professionalPreference.toString();
+// const handleSavePreferences = () => {
+//   const simplicityPref: string = simplicityPreference.toString();
+//   const humourPref: string = humourPreference.toString();
+//   const professionalismPref: string = professionalPreference.toString();
 
 
-    localStorage.setItem("Simplicity Preference", simplicityPref)
-    localStorage.setItem("Humour Preference", humourPref)
-    localStorage.setItem("Proffesionalism Preference", professionalismPref)
+//     localStorage.setItem("Simplicity Preference", simplicityPref)
+//     localStorage.setItem("Humour Preference", humourPref)
+//     localStorage.setItem("Proffesionalism Preference", professionalismPref)
 
-      // should contain the created CoursePref object
+//       // should contain the created CoursePref object
 
-      return (
-        <div className="flex gap-3 w-full">
-          <button onClick={() => mutate({ simplicityPref: simplicityPreference, humourPref: humourPreference, professionalismPref: professionalPreference})}>Post</button>
-        </div>)
+//       return (
+//         <div className="flex gap-3 w-full">
+//           <button onClick={() => mutate({ simplicityPref: simplicityPreference, humourPref: humourPreference, professionalismPref: professionalPreference})}>Post</button>
+//         </div>)
 
-};
+// };
 
 const handleDrop = async  (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -61,7 +58,7 @@ const handleDrop = async  (e: React.DragEvent<HTMLDivElement>) => {
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = () => {
       const fileContent = reader.result as string;
       console.log(fileContent); // Do something with the file content
     };
@@ -89,7 +86,7 @@ droppedFiles.forEach((file) => {
       <div className='flex' >
         <div 
         className="m-10 bg-indigo-500 text-slate-100 rounded-full flex flex-col justify-center items-center w-2/4"
-        onDrop={handleDrop} 
+        onDrop={() => handleDrop} 
         onDragOver={(e)=>e.preventDefault()}
         >
              {droppedFiles.length === 0 ? (
