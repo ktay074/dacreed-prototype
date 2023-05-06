@@ -27,6 +27,7 @@ const CreatePostWizard = () => {
     
     }
   });
+  
 
   console.log(user)
 
@@ -49,6 +50,7 @@ const CreatePostWizard = () => {
     disabled={isPosting}
     />
     <button onClick={() => void mutate({ content: input})}>Post</button>
+
   </div>)
 }
 
