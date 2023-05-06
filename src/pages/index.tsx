@@ -29,10 +29,11 @@ const CreatePostWizard = () => {
       console.error(error);
     },
   });
-  
 
-  
-
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await mutate({content: input});
+  };
   console.log(user)
 
   if (!user) return null;
@@ -53,7 +54,9 @@ const CreatePostWizard = () => {
     onChange={(e) => setInput(e.target.value)}
     disabled={isPosting}
     />
-    <button onClick={() => mutate({ content: input})}>Post</button>
+    <button type="submit" disabled={isPosting} onClick={() => handleSubmit}>
+    {isPosting ? "Posting..." : "Post"}
+    </button>
   </div>)
 }
 

@@ -24,13 +24,17 @@ import { prisma } from "~/server/db";
  *
  * @see https://trpc.io/docs/context
  */
+interface RequestBody {
+  id: string;
+}
+
 export const createTRPCContext = (opts: CreateNextContextOptions) => {
 
   const {req} = opts;
   const sesh = getAuth(req);
 
   const userId = sesh.userId;
-  const id: string = req.body;
+  const { id } = req.body as RequestBody;
 
   return {
     prisma,

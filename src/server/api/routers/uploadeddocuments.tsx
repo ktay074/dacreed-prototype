@@ -1,12 +1,9 @@
-import { prisma } from '~/server/db';
-import { any, z } from "zod";
-import type { RouterOutputs } from '~/utils/api';
+import {  z } from "zod";
 import { 
     createTRPCRouter, 
     privateProcedure, 
     publicProcedure 
 } from "~/server/api/trpc";
-import type { NextApiRequest } from 'next';
 
 export const documentRouter = createTRPCRouter({
 
