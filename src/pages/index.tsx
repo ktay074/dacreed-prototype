@@ -23,13 +23,15 @@ const CreatePostWizard = () => {
   const {mutate, isLoading: isPosting} = api.posts.create.useMutation({
     onSuccess: () => {
       setInput("");
-      try{
       ctx.posts.getAll.invalidate();
-    }catch(error){
-return error
-    }
-    }
+    },
+    onError: (error) => {
+      console.error(error);
+    },
   });
+  
+
+  
 
   console.log(user)
 

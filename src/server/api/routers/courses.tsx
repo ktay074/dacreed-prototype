@@ -21,26 +21,4 @@ export const coursesRouter = createTRPCRouter({
     return courses;
   }),
 
-  getById: publicProcedure.query<{id: string}>(async ({ ctx }) => {
-    const course = await ctx.prisma.course.findUnique({
-      where: { id: ctx.id },
-      select: {
-        id: true,
-        title: true,
-        nodes: {
-          select: {
-            id: true,
-            title: true,
-            description: true,
-          },
-        },
-      },
-    });
-
-    if (!course) {
-      throw new Error(`Course with id ${ctx.id} not found`);
-    }
-
-    return course;
-  }),
 });
