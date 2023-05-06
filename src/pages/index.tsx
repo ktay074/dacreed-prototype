@@ -24,16 +24,10 @@ const CreatePostWizard = () => {
     onSuccess: () => {
       setInput("");
       ctx.posts.getAll.invalidate();
-    },
-    onError: (error) => {
-      console.error(error);
-    },
+    
+    }
   });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await mutate({content: input});
-  };
   console.log(user)
 
   if (!user) return null;
@@ -54,9 +48,7 @@ const CreatePostWizard = () => {
     onChange={(e) => setInput(e.target.value)}
     disabled={isPosting}
     />
-    <button type="submit" disabled={isPosting} onClick={() => handleSubmit}>
-    {isPosting ? "Posting..." : "Post"}
-    </button>
+    <button onClick={() => void mutate({ content: input})}>Post</button>
   </div>)
 }
 
