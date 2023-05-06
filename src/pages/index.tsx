@@ -23,7 +23,7 @@ const CreatePostWizard = () => {
   const {mutate, isLoading: isPosting} = api.posts.create.useMutation({
     onSuccess: () => {
       setInput("");
-      ctx.posts.getAll.invalidate();
+      void ctx.posts.getAll.invalidate();
     
     }
   });
@@ -49,7 +49,7 @@ const CreatePostWizard = () => {
     onChange={(e) => setInput(e.target.value)}
     disabled={isPosting}
     />
-    <button onClick={() => void mutate({ content: input})}>Post</button>
+    <button onClick={() => mutate({ content: input})}>Post</button>
 
   </div>)
 }
