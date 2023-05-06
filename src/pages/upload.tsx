@@ -47,7 +47,7 @@ const handleProfessionalismChange = (newProffesionalismValue: number[]) => {
 
 // };
 
-const handleDrop = async  (e: React.DragEvent<HTMLDivElement>) => {
+const handleDrop =  (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const files = e.dataTransfer.files;
 
