@@ -19,9 +19,8 @@ model Post {
 model Document {
   id        String   @id
   createdAt DateTime @default(now())
-  content   String
-  authorId  String
-  file      Bytes
+  content   Bytes
+  authorId  String   @default("authorId")
 
   @@index([authorId])
 }
@@ -67,4 +66,26 @@ model LearningPref {
   name   String
   nodeId String
   Node   Node   @relation(fields: [nodeId], references: [id])
+}
+
+model CoursePref {
+  id                  String @id
+  simplicityPref      Int[]  @default([])
+  humourPref          Int[]  @default([])
+  proffesionalismPref Int[]  @default([])
+}
+
+model Events {
+  id           String @id
+  timeZone     String
+  region       String
+  country      String
+  page         String
+  timeSpent    Int
+  scrolling    Int
+  mouseClicks  Int
+  buttonClicks Int
+  linkClicks   Int
+  mouseMoveInt Int
+  keyClicks    Int
 }
