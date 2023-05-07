@@ -66,7 +66,7 @@ create: privateProcedure
 
     const post = await ctx.prisma.post.create({
       data: {
-        authorId,
+        authorId: authorId,
         content: input.content,
       },
     });
