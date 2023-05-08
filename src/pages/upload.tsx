@@ -63,7 +63,6 @@ const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
       const fileContent = reader.result;
       console.log(fileContent); // Do something with the file content
       
-
     };
     
     if (file?.type === "application/msword" || file?.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
@@ -81,7 +80,6 @@ const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
       reader.readAsText(file);
     } else {
       console.log(`Unsupported file type: ${file ? file.type : 'undefined'}`);
-
     }
   }
 };

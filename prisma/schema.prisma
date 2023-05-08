@@ -62,14 +62,21 @@ model Node {
 }
 
 model LearningPref {
-  id     String @id @default(cuid())
+  id     String @id
   name   String
   nodeId String
-  node   Node   @relation(fields: [nodeId], references: [id])
+  Node   Node   @relation(fields: [nodeId], references: [id])
+}
+
+model CoursePref {
+  id                  String @id
+  simplicityPref      Int[]  @default([])
+  humourPref          Int[]  @default([])
+  proffesionalismPref Int[]  @default([])
 }
 
 model Events {
-  id           String @id @default(cuid())
+  id           String @id
   timeZone     String
   region       String
   country      String
@@ -81,11 +88,4 @@ model Events {
   linkClicks   Int
   mouseMoveInt Int
   keyClicks    Int
-}
-
-model CoursePref {
-  id                  String @id @default(cuid())
-  simplicityPref      Int[]  @default([])
-  humourPref          Int[]  @default([])
-  proffesionalismPref Int[]  @default([])
 }

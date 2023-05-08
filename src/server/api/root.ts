@@ -1,5 +1,6 @@
 import { createTRPCRouter } from "~/server/api/trpc";
 import { postsRouter } from "~/server/api/routers/posts";
+import { getUsers } from "~/server/api/routers/getuserdata"; 
 import { documentRouter } from "./routers/uploadeddocuments";
 import { coursesRouter } from "./routers/courses";
 import { coursePreferenceRouter } from "./routers/coursepreferences";
@@ -11,6 +12,7 @@ import { coursePreferenceRouter } from "./routers/coursepreferences";
  */
 export const appRouter = createTRPCRouter({
   posts: postsRouter,
+  findUsers: getUsers, 
   document: documentRouter,
   courses: coursesRouter,
   preferences: coursePreferenceRouter
