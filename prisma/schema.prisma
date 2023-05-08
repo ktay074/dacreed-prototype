@@ -19,8 +19,8 @@ model Post {
 model Document {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  content   String
-  authorId  String @default("authorId")
+  content   Bytes
+  authorId  String   @default("authorId")
 
   @@index([authorId])
 }
@@ -29,7 +29,7 @@ model User {
   id        String   @id
   createdAt DateTime @default(now())
   username  String
-  courses Course[]
+  courses   Course[] @relation("CourseToUser")
 
   @@index([id])
 }
@@ -41,50 +41,51 @@ model Course {
   authorId  String
   title     String
   duration  DateTime
-  passValue Int @default(80)
-  nodes Node[]
-  users User[]
-  
+  passValue Int      @default(80)
+  nodes     Node[]
+  users     User[]   @relation("CourseToUser")
+
   @@index([title])
 }
 
 model Node {
-  id          String   @id @default(cuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
+  id            String         @id @default(cuid())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now())
   courseId      String
-  course        Course   @relation(fields: [courseId], references: [id])
-  title       String
-  description String
+  title         String
+  description   String
   learningPrefs LearningPref[]
+  course        Course         @relation(fields: [courseId], references: [id])
 
   @@index([title])
 }
+
 model LearningPref {
-  id          String @id @default(cuid())
-  name        String
-  node        Node   @relation(fields: [nodeId], references: [id])
-  nodeId      String
+  id     String @id @default(cuid())
+  name   String
+  nodeId String
+  node   Node   @relation(fields: [nodeId], references: [id])
 }
 
 model Events {
-  id          String @id @default(cuid())
-  timeZone String
-  region String
-  country String
-  page String
-  timeSpent Int
-  scrolling Int
-  mouseClicks Int
+  id           String @id @default(cuid())
+  timeZone     String
+  region       String
+  country      String
+  page         String
+  timeSpent    Int
+  scrolling    Int
+  mouseClicks  Int
   buttonClicks Int
-  linkClicks Int
+  linkClicks   Int
   mouseMoveInt Int
-  keyClicks Int
+  keyClicks    Int
 }
-model CoursePref {
-  id          String @id @default(cuid())
-  simplicityPref Int[]   @default([])
-  humourPref Int[]   @default([])
-  proffesionalismPref Int[]   @default([])
 
+model CoursePref {
+  id                  String @id @default(cuid())
+  simplicityPref      Int[]  @default([])
+  humourPref          Int[]  @default([])
+  proffesionalismPref Int[]  @default([])
 }

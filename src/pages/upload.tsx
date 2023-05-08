@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Slider from '~/components/slider';
 import { api } from "~/utils/api";
 import { useState } from 'react';
-
+import { read } from "docx";
 
 export default function UploadPage() {
 const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
@@ -11,11 +11,16 @@ const [humourPreference, sethumorPreference] = useState([1])
 const [simplicityPreference, setSimplicityPreference] = useState([1])
 
 const ctx = api.useContext();
-const {mutate} = api.document.create.useMutation({
+
+//call API to save the preferences to DB
+const {mutate} = api.preferences.create.useMutation({
   onSuccess: () => {
     void ctx.courses.getAll.invalidate();
   }
 });
+
+
+
 
 const handleSimplicityChange = (newSimplicityValue: number[]) => {
   setSimplicityPreference(newSimplicityValue);
@@ -47,34 +52,45 @@ const handleProfessionalismChange = (newProffesionalismValue: number[]) => {
 
 // };
 
-const handleDrop =  (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
+const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+  e.preventDefault();
+  const files = e.dataTransfer.files;
 
-    // Set the dropped files to state
-    setDroppedFiles(Array.from(files));
+  // Set the dropped files to state
+  setDroppedFiles(Array.from(files));
 
-      // Read the contents of the dropped files
+  // Read the contents of the dropped files
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     const reader = new FileReader();
-    reader.onload = () => {
-      const fileContent = reader.result as string;
+    reader.onload = async () => {
+      const fileContent = reader.result;
       console.log(fileContent); // Do something with the file content
+      
+
     };
-    if (file) {
-      reader.readAsText(file);
-    }
     
+    if (file?.type === "application/msword" || file?.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+      // Word document
+      reader.readAsArrayBuffer(file);
+    } else if (file?.type.startsWith("image/")) {
+      // Image file
+      const fileUrl = URL.createObjectURL(file);
+      const img = document.createElement("img");
+      img.src = fileUrl;
+      document.body.appendChild(img);
+      reader.readAsDataURL(file);
+    } else if (file?.type.startsWith("text/")) {
+      // Text file
+      reader.readAsText(file);
+    } else {
+      console.log(`Unsupported file type: ${file?.type}`);
+    }
   }
-    // Call the API to save the files to the database
-  //   api.document.create.useMutation({
-  //   onSuccess: () => {
-  //     setDroppedFiles([]);
-  //     ctx.document.getAll.invalidate();
-  //   }
-  // })
-}
+};
+
+
+
 droppedFiles.forEach((file) => {
   console.log('Name:', file.name);
   console.log('Type:', file.type);
@@ -86,7 +102,7 @@ droppedFiles.forEach((file) => {
       <div className='flex' >
         <div 
         className="m-10 bg-indigo-500 text-slate-100 rounded-full flex flex-col justify-center items-center w-2/4"
-        onDrop={() => handleDrop} 
+        onDrop={handleDrop} 
         onDragOver={(e)=>e.preventDefault()}
         >
              {droppedFiles.length === 0 ? (
