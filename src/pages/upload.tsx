@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Slider from '~/components/slider';
 import { api } from "~/utils/api";
 import { useState } from 'react';
-import { read } from "docx";
 
 export default function UploadPage() {
 const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
