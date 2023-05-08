@@ -2,27 +2,92 @@ import Link from 'next/link';
 import Slider from '~/components/slider';
 import { api } from "~/utils/api";
 import { useState } from 'react';
-import type {RouterOutputs} from "~/utils/api"
 
 export default function UploadPage() {
 const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
+const [professionalPreference, setProfessionalPreference] = useState([1])
+const [humourPreference, sethumorPreference] = useState([1])
+const [simplicityPreference, setSimplicityPreference] = useState([1])
+
+const ctx = api.useContext();
+
+//call API to save the preferences to DB
+const {mutate} = api.preferences.create.useMutation({
+  onSuccess: () => {
+    void ctx.courses.getAll.invalidate();
+  }
+});
+
+const handleSimplicityChange = (newSimplicityValue: number[]) => {
+  setSimplicityPreference(newSimplicityValue);
+  console.log(simplicityPreference)
+};
+const handleHumourChange = (newHumourValue: number[]) => {
+  sethumorPreference(newHumourValue);
+};
+const handleProfessionalismChange = (newProffesionalismValue: number[]) => {
+  setProfessionalPreference(newProffesionalismValue);
+};
+
+// const handleSavePreferences = () => {
+//   const simplicityPref: string = simplicityPreference.toString();
+//   const humourPref: string = humourPreference.toString();
+//   const professionalismPref: string = professionalPreference.toString();
 
 
-const handleDrop = async  (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
+//     localStorage.setItem("Simplicity Preference", simplicityPref)
+//     localStorage.setItem("Humour Preference", humourPref)
+//     localStorage.setItem("Proffesionalism Preference", professionalismPref)
 
-    // Set the dropped files to state
-    setDroppedFiles(Array.from(files));
-    const ctx = api.useContext();
-    // Call the API to save the files to the database
-    await api.document.create.useMutation({
-        onSuccess: () => {
-          setDroppedFiles([]);
-          ctx.document.getAll.invalidate()
-        }
-      })
-}
+//       // should contain the created CoursePref object
+
+//       return (
+//         <div className="flex gap-3 w-full">
+//           <button onClick={() => mutate({ simplicityPref: simplicityPreference, humourPref: humourPreference, professionalismPref: professionalPreference})}>Post</button>
+//         </div>)
+
+// };
+
+const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  e.preventDefault();
+  const files = e.dataTransfer.files;
+
+  // Set the dropped files to state
+  setDroppedFiles(Array.from(files));
+
+  // Read the contents of the dropped files
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const reader = new FileReader();
+    reader.onload = () => {
+      const fileContent = reader.result;
+      console.log(fileContent); // Do something with the file content
+      
+    };
+    
+    if (file?.type === "application/msword" || file?.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+      // Word document
+      reader.readAsArrayBuffer(file);
+    } else if (file?.type.startsWith("image/")) {
+      // Image file
+      const fileUrl = URL.createObjectURL(file);
+      const img = document.createElement("img");
+      img.src = fileUrl;
+      document.body.appendChild(img);
+      reader.readAsDataURL(file);
+    } else if (file?.type.startsWith("text/")) {
+      // Text file
+      reader.readAsText(file);
+    } else {
+      console.log(`Unsupported file type: ${file ? file.type : 'undefined'}`);
+    }
+  }
+};
+
+droppedFiles.forEach((file) => {
+  console.log('Name:', file.name);
+  console.log('Type:', file.type);
+});
 
 
   return (
@@ -51,13 +116,19 @@ const handleDrop = async  (e: React.DragEvent<HTMLDivElement>) => {
             <h1 className='font-bold text-5xl pb-10'>Course Name</h1>
             <p className='text-indigo-700 font-semibold pb-6'>Dial your preferences</p>
             
-            <Slider />
-            <Slider />
-            <Slider />
+            <Slider title={"Simplicity"} min={1} max={5} step={1} values={simplicityPreference} onChange={handleSimplicityChange}/>
+            <Slider title={"Humour"} min={1} max={5} step={1} values={humourPreference} onChange={handleHumourChange}/>
+            <Slider title={"Professionalism"} min={1} max={5} step={1} values={professionalPreference} onChange={handleProfessionalismChange}/>
+            
             <div className='w-4/5 flex flex-col '>
             <Link href="/coursepage">
             <button className='text-2xl text-slate-100 bg-indigo-700 rounded-3xl px-4 py-2 mt-5 w-2/4 self-end'>Generate</button>
             </Link>
+
+            <button 
+            className='text-2xl text-slate-100 bg-indigo-700 rounded-3xl px-4 py-2 mt-5 w-2/4 self-end'
+            onClick={() => mutate({ simplicityPref: simplicityPreference, humourPref: humourPreference, professionalismPref: professionalPreference})}
+            >Save Preferences</button>
             <div className='w-full bg-red-200'></div>
             </div>
         </div>
