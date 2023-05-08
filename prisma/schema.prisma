@@ -89,4 +89,3 @@ model Events {
   mouseMoveInt Int
   keyClicks    Int
 }
-
