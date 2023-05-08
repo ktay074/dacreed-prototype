@@ -5,3 +5,12 @@
 body{
     @apply bg-slate-100 text-black;
 }
+h2{
+    font-size: 30px;
+}
+h3{
+    font-size: 24px;
+}
+p{
+    font-size: 18px;
+}

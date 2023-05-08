@@ -10,7 +10,6 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime"
 import Image from 'next/image';
 import { LoadingPage } from "../components/loading";
-import upload from "./upload";
 import { useState } from "react";
 
 dayjs.extend(relativeTime);
@@ -25,9 +24,11 @@ const CreatePostWizard = () => {
   const {mutate, isLoading: isPosting} = api.posts.create.useMutation({
     onSuccess: () => {
       setInput("");
-      ctx.posts.getAll.invalidate();
+      void ctx.posts.getAll.invalidate();
+    
     }
   });
+  
 
   console.log(user)
 
@@ -50,6 +51,7 @@ const CreatePostWizard = () => {
     disabled={isPosting}
     />
     <button onClick={() => mutate({ content: input})}>Post</button>
+
   </div>)
 }
 
@@ -61,15 +63,15 @@ return (
   <div className="p-4 border-b border-slate-400 flex gap-3" 
           key={post.id}>
             <Image src={author.profileImageUrl} className="w-14 h-14 rounded-full" 
-            alt={`@${author.username}'sProfile Picture`}
+            alt={`@${author.username ?? 'unknown'}'s Profile Picture`}
             width={56}
             height={56}
             />
             <div className="flex flex-col">
-              <div className="flex text-slate-300 gap-1"> <span >{`@${author.username}`} </span>
+              <div className="flex text-slate-300 gap-1"> <span >{`@${author.username ?? 'unknown'}`} </span>
               
                <span className="font-thin">{` · ${dayjs(
-                post.createdAt
+                post.createdAt 
                 ).fromNow()}`}</span> 
                 </div>
               <span className="text-xl">{post.content}</span>
@@ -98,14 +100,12 @@ const Feed = () => {
 
 // Main home page 
 const Home: NextPage = () => {
-  const {user, isLoaded: userLoaded, isSignedIn} = useUser();
+  const { isLoaded: userLoaded, isSignedIn} = useUser();
 
-  const {data} = api.posts.getAll.useQuery();
 
   // const getUser = api.findUser.getUser.useQuery(); 
   
   if (!userLoaded) return <div/>
-
 
   return (
     <>

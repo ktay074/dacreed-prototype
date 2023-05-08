@@ -24,16 +24,23 @@ import { prisma } from "~/server/db";
  *
  * @see https://trpc.io/docs/context
  */
+interface RequestBody {
+  id: string;
+}
+
 export const createTRPCContext = (opts: CreateNextContextOptions) => {
 
   const {req} = opts;
   const sesh = getAuth(req);
 
   const userId = sesh.userId;
+  const { id } = req.body as RequestBody;
 
   return {
     prisma,
-    userId
+    userId,
+    id,
+    req,
   };
 };
 
@@ -49,6 +56,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 import { getAuth } from "@clerk/nextjs/server";
 import { TRPCError } from "@trpc/server";
+
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
@@ -101,4 +109,5 @@ const enforceUserIsAuthed = t.middleware(async({ctx, next}) => {
   })
 })
 
-export const privateProcedure = t.procedure.use(enforceUserIsAuthed)
+export const privateProcedure = t.procedure
+  .use(enforceUserIsAuthed)
