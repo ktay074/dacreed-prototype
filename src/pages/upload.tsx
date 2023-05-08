@@ -18,9 +18,6 @@ const {mutate} = api.preferences.create.useMutation({
   }
 });
 
-
-
-
 const handleSimplicityChange = (newSimplicityValue: number[]) => {
   setSimplicityPreference(newSimplicityValue);
   console.log(simplicityPreference)
@@ -51,7 +48,7 @@ const handleProfessionalismChange = (newProffesionalismValue: number[]) => {
 
 // };
 
-const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
   e.preventDefault();
   const files = e.dataTransfer.files;
 
@@ -62,7 +59,7 @@ const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     const reader = new FileReader();
-    reader.onload = async () => {
+    reader.onload = () => {
       const fileContent = reader.result;
       console.log(fileContent); // Do something with the file content
       
@@ -83,12 +80,11 @@ const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
       // Text file
       reader.readAsText(file);
     } else {
-      console.log(`Unsupported file type: ${file?.type}`);
+      console.log(`Unsupported file type: ${file ? file.type : 'undefined'}`);
+
     }
   }
 };
-
-
 
 droppedFiles.forEach((file) => {
   console.log('Name:', file.name);
