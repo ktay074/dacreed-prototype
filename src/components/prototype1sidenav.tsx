@@ -1,9 +1,9 @@
-import Profile from "../images/profileicon-prototype1.png"
-import Dashboard from "../images/dashboardicon-prototype1.png"
-import Company from "../images/companyicon-prototype1.png"
-import Calendar from "../images/calendaricon-prototype1.png"
-import Courses from "../images/coursesicon-prototype1.png"
-import Reports from "../images/reportsicon-prototype1.png"
+import Profile from "../images/prototype1/profileicon-prototype1.png"
+import Dashboard from "../images/prototype1/dashboardicon-prototype1.png"
+import Company from "../images/prototype1/companyicon-prototype1.png"
+import Calendar from "../images/prototype1/calendaricon-prototype1.png"
+import Courses from "../images/prototype1/coursesicon-prototype1.png"
+import Reports from "../images/prototype1/reportsicon-prototype1.png"
 import Image from "next/image"
 
 export default function LeftNavBar () {
