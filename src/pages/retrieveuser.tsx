@@ -1,8 +1,8 @@
 import { type NextPage } from "next"; 
 import Head from "next/head"; 
 import { api } from "~/utils/api"; 
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
+// import { useForm } from "react-hook-form";
+// import { useRouter } from "next/router";
 
 type UserInfo = {
     name: string; 
@@ -28,7 +28,7 @@ return (
         <main className="flex min-h-screen flex-col items-center justify-center bg-indigo-50]">
             <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
             <h1 className="text-5xl font-extrabold tracking-tight text-[#2e026d] sm:text-[5rem]">
-                Hello {findAllUsers.data?.map(user => <div>{user.username}</div>)}
+                Hello {findAllUsers.data?.map(user => <div key={user.id }>{user.username}</div>)}
             </h1>
         
             

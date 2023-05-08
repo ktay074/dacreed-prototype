@@ -1,5 +1,5 @@
-import { create } from "domain";
-import { z } from "zod";
+// import { create } from "domain";
+// import { z } from "zod";
 import { 
     createTRPCRouter, 
     publicProcedure 
@@ -14,7 +14,7 @@ export const getUsers = createTRPCRouter({
         //         userid: z.string(),
         //     })
         // )
-        .query(async ({ ctx, input }) => {
+        .query(async ({ ctx }) => {
             const user = await ctx.prisma.user.findMany({
                 take: 5,
                 orderBy: [{ username: "desc" }]
