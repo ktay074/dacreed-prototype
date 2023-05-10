@@ -62,11 +62,11 @@ const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     reader.onload = () => {
       const fileContent = reader.result;
       console.log(fileContent); // Do something with the file content
-      
     };
     
     if (file?.type === "application/msword" || file?.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
       // Word document
+      
       reader.readAsArrayBuffer(file);
     } else if (file?.type.startsWith("image/")) {
       // Image file
@@ -88,7 +88,6 @@ droppedFiles.forEach((file) => {
   console.log('Name:', file.name);
   console.log('Type:', file.type);
 });
-
 
   return (
     <div className=' sm:my-10 md:mx-32 '>

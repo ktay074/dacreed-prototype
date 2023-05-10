@@ -9,7 +9,7 @@ import { api } from "~/utils/api";
     import RightMainMenu from '~/components/rightmainmenu'
     import LeftMainMenu from '~/components/leftmainmenu'
     import Sections from '~/components/sections';
-    import { LoadingPage } from "../components/loading";
+    import { LoadingPage } from "../../components/loading";
 
 const CourseInfoPage: React.FC = () => {
   const [isLeftMenuOpen, setIsLeftMenuOpen] = useState(true);
