@@ -6,7 +6,7 @@ import { useUserActivity } from "../utils/analytics";
 import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  useUserActivity();
+ 
   
   return (
     <ClerkProvider {...pageProps} >

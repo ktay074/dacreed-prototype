@@ -19,7 +19,9 @@ model Post {
 model Document {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  content   Bytes
+  org_content   Bytes
+  org_name String
+  org_type String
   authorId  String   @default("authorId")
 
   @@index([authorId])

@@ -3,13 +3,18 @@ import Slider from '~/components/slider';
 import { api } from "~/utils/api";
 import { useState } from 'react';
 
+
 export default function UploadPage() {
 const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
 const [professionalPreference, setProfessionalPreference] = useState([1])
 const [humourPreference, sethumorPreference] = useState([1])
 const [simplicityPreference, setSimplicityPreference] = useState([1])
+const [org_name, setOrg_name] = useState("")
+const [org_type, setOrg_type] = useState("")
+const [org_content, setOrg_content] = useState<ArrayBuffer | null>(null)
 
 const ctx = api.useContext();
+
 
 //call API to save the preferences to DB
 const {mutate} = api.preferences.create.useMutation({
@@ -17,6 +22,13 @@ const {mutate} = api.preferences.create.useMutation({
     void ctx.courses.getAll.invalidate();
   }
 });
+
+  // Call API to save the user activity to DB
+  const createDocumentMutation = api.document.create.useMutation({
+    onSuccess: () => {
+      void ctx.document.getAll.invalidate();
+    }
+  });
 
 const handleSimplicityChange = (newSimplicityValue: number[]) => {
   setSimplicityPreference(newSimplicityValue);
@@ -27,6 +39,12 @@ const handleHumourChange = (newHumourValue: number[]) => {
 };
 const handleProfessionalismChange = (newProffesionalismValue: number[]) => {
   setProfessionalPreference(newProffesionalismValue);
+};
+
+const handleGenerateCourse = () => {
+  // Call the mutate function to trigger the mutation
+  createDocumentMutation.mutate({ org_content: "org_content", org_name: org_name, org_type: org_type });
+console.log(createDocumentMutation)
 };
 
 // const handleSavePreferences = () => {
@@ -55,18 +73,23 @@ const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
   // Set the dropped files to state
   setDroppedFiles(Array.from(files));
 
+droppedFiles.forEach((file) => {
+  setOrg_type(file.type);
+  setOrg_name(file.name);
+});
+
   // Read the contents of the dropped files
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     const reader = new FileReader();
     reader.onload = () => {
       const fileContent = reader.result;
-      console.log(fileContent); // Do something with the file content
+
+      setOrg_content(fileContent as ArrayBuffer); // Do something with the file content
     };
     
     if (file?.type === "application/msword" || file?.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
       // Word document
-      
       reader.readAsArrayBuffer(file);
     } else if (file?.type.startsWith("image/")) {
       // Image file
@@ -83,11 +106,6 @@ const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     }
   }
 };
-
-droppedFiles.forEach((file) => {
-  console.log('Name:', file.name);
-  console.log('Type:', file.type);
-});
 
   return (
     <div className=' sm:my-10 md:mx-32 '>
@@ -120,9 +138,13 @@ droppedFiles.forEach((file) => {
             <Slider title={"Professionalism"} min={1} max={5} step={1} values={professionalPreference} onChange={handleProfessionalismChange}/>
             
             <div className='w-4/5 flex flex-col '>
-            <Link href="/coursepage">
-            <button className='text-2xl text-slate-100 bg-indigo-700 rounded-3xl px-4 py-2 mt-5 w-2/4 self-end'>Generate</button>
-            </Link>
+           
+            <button 
+            className='text-2xl text-slate-100 bg-indigo-700 rounded-3xl px-4 py-2 mt-5 w-2/4 self-end'
+            onClick={handleGenerateCourse}
+            
+            >Generate</button>
+           
 
             <button 
             className='text-2xl text-slate-100 bg-indigo-700 rounded-3xl px-4 py-2 mt-5 w-2/4 self-end'
