@@ -22,7 +22,7 @@ interface UserActivityData {
 export const useUserActivity = (): void => {
   const ctx = api.useContext();
 
-  let userActivity: UserActivityData = {
+  const userActivity: UserActivityData = {
     id: id,
     timeZone: "",
     region: "",
@@ -54,10 +54,10 @@ export const useUserActivity = (): void => {
     userActivity.page = window.location.href;
 
     // Track the time spent on the page
-    let startTime = new Date().getTime();
+    const startTime = new Date().getTime();
     window.addEventListener("beforeunload", () => {
-      let endTime = new Date().getTime();
-      let timeSpent = endTime - startTime;
+      const endTime = new Date().getTime();
+      const timeSpent = endTime - startTime;
       userActivity.timeSpent = timeSpent;
       createAnalyticsMutation.mutate(userActivity);
     });
@@ -101,5 +101,5 @@ export const useUserActivity = (): void => {
       userActivity.keyClicks++;
       createAnalyticsMutation.mutate(userActivity);
     });
-  }, []);
+  });
 };

@@ -76,7 +76,7 @@ const CourseInfoPage: React.FC = () => {
       {/* Left Menu */}
       <div className='col-span-2 flex'>
         
-<LeftMainMenu isLeftMenuOpen={isLeftMenuOpen} />
+<LeftMainMenu isLeftMenuOpen={isLeftMenuOpen} courseTitle={courseTitle} />
         {/* Left Menu Toggle Button */}
         <button
           className={` h-10 p-1 mt-20 bg-amber-400  rounded-r text-slate-200 `}

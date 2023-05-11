@@ -5,11 +5,14 @@ import {
 import { PrimaryButton} from '~/components/button'
 import Image from "next/image";
 
+import logo from "~/images/teamspluslogo.svg"
+
 interface LeftMainMenuProps {
     isLeftMenuOpen: boolean;
+    courseTitle: string;
   }
 
-const RightMainMenu: React.FC<LeftMainMenuProps> = ({ isLeftMenuOpen }) => {
+const RightMainMenu: React.FC<LeftMainMenuProps> = ({ isLeftMenuOpen, courseTitle }) => {
     const [activeButton, setActiveButton] = useState('');
       
     const handleButtonClick = (buttonTitle: string) => {
@@ -24,12 +27,12 @@ const RightMainMenu: React.FC<LeftMainMenuProps> = ({ isLeftMenuOpen }) => {
           
      {/* Left Menu Content */}
      <div className="w-full bg-indigo-50  h-full ">
-     <div className='px-4'>
-         <Image src='' alt=''></Image>
+     <div className='px-4 flex'>
+         <Image src={logo} alt='teams plus logo'></Image>
          <h3>Hi, Saskia</h3>
      </div>
      <div className='px-4'>
-         <h2 className='text-center font-bold'>[Course Title]</h2>
+         <h2 className='text-center font-bold'>{courseTitle}</h2>
          <div className='progressbar bg-slate-200 h-2 rounded mx-4 my-4 '></div>
          <h3 className='mb-4 font-semibold'>Progress 0%</h3>
      </div>

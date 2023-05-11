@@ -31,10 +31,9 @@ export const documentRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const orgContentBuffer = Buffer.from(input.org_content);
       const document = await ctx.prisma.document.create({
         data: {
-          org_content: orgContentBuffer,
+          org_content: input.org_content,
           org_name: input.org_name,
           org_type: input.org_type
         },
