@@ -3,7 +3,7 @@ import {
     InformationCircleIcon } from '@heroicons/react/24/solid';
 
 import { PrimaryButton} from '~/components/button'
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 import logo from "~/images/teamspluslogo.svg"
 
@@ -28,7 +28,7 @@ const RightMainMenu: React.FC<LeftMainMenuProps> = ({ isLeftMenuOpen, courseTitl
      {/* Left Menu Content */}
      <div className="w-full bg-indigo-50  h-full ">
      <div className='px-4 flex'>
-         <Image src={logo} alt='teams plus logo'></Image>
+         <Image src={logo as StaticImageData} alt='teams plus logo'></Image>
          <h3>Hi, Saskia</h3>
      </div>
      <div className='px-4'>

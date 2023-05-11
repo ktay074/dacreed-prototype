@@ -113,7 +113,7 @@ droppedFiles.forEach((file) => {
     <div className=' sm:my-10 md:mx-32 '>
       <div className='flex' >
         <div 
-        className="m-10 bg-indigo-500 text-slate-100  flex flex-col justify-center items-center w-2/4"
+        className="m-10 bg-indigo-500 rounded-3xl text-slate-100  flex flex-col justify-center items-center w-2/4"
         onDrop={handleDrop} 
         onDragOver={(e)=>e.preventDefault()}
         > {droppedFiles.length === 0 ? (

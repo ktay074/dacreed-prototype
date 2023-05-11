@@ -1,11 +1,12 @@
-import {  useUser } from "@clerk/nextjs";
-import { type NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
 
-// Main home page 
+
+// Edit course page 
 const CourseEdit = () => {
-
+return(
+    <div>
+        hi
+    </div>
+)
 };
 
 export default CourseEdit;
