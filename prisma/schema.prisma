@@ -19,7 +19,9 @@ model Post {
 model Document {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  content   Bytes
+  org_content   String
+  org_name String
+  org_type String
   authorId  String   @default("authorId")
 
   @@index([authorId])
@@ -69,7 +71,7 @@ model LearningPref {
 }
 
 model CoursePref {
-  id                  String @id
+  id                  String @id @default(cuid())
   simplicityPref      Int[]  @default([])
   humourPref          Int[]  @default([])
   proffesionalismPref Int[]  @default([])

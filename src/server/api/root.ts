@@ -3,6 +3,7 @@ import { postsRouter } from "~/server/api/routers/posts";
 import { getUsers } from "~/server/api/routers/getuserdata"; 
 import { documentRouter } from "./routers/uploadeddocuments";
 import { coursesRouter } from "./routers/courses";
+import { analyticsRouter } from "./routers/analytics";
 import { coursePreferenceRouter } from "./routers/coursepreferences";
 
 /**
@@ -15,7 +16,8 @@ export const appRouter = createTRPCRouter({
   findUsers: getUsers, 
   document: documentRouter,
   courses: coursesRouter,
-  preferences: coursePreferenceRouter
+  preferences: coursePreferenceRouter,
+  analytics: analyticsRouter
 });
 
 // export type definition of API

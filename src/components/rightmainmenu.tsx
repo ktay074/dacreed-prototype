@@ -13,19 +13,22 @@ const RightMainMenu: React.FC<RightMainMenuProps> = ({ isRightMenuOpen }) => {
     const [notepadInput, setNotepadInput] = useState('');
     const [downloadNotepadType, setDownloadNotepadType] = useState(false);
 
+    //changes the notepad input to the value
     const handleTextInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setNotepadInput(event.target.value);
       };
     
+      //clears the notepad
       const handleClearNotepad = () => {
         const confirmed = window.confirm("Are you sure you want to clear the Notepad?");
         if (confirmed) {
           setNotepadInput("");
         }
     }
+
+    //downloads notepad as .txt file
     const handleDownloadTxtNotepad = () => {
-      
-  const filename = prompt("Please enter the filename for the PDF", "notepad.pdf");
+        const filename = prompt("Please enter the filename for the PDF", "notepad.pdf");
         if(filename) {
         const blob = new Blob([notepadInput], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
@@ -39,9 +42,9 @@ const RightMainMenu: React.FC<RightMainMenuProps> = ({ isRightMenuOpen }) => {
         }
       };
       
+      //downloads notepad as .pdf file
       const handleDownloadPDFNotepad = () => {
-        
-  const filename = prompt("Please enter the filename for the PDF", "notepad.pdf");
+        const filename = prompt("Please enter the filename for the PDF", "notepad.pdf");
         if (filename) {
             const pdf = new jsPDF();
             pdf.text(notepadInput, 10, 10); // Add text to the PDF document
@@ -56,6 +59,8 @@ const RightMainMenu: React.FC<RightMainMenuProps> = ({ isRightMenuOpen }) => {
             URL.revokeObjectURL(url);
         }
     };
+
+    //shows options if you want to download as pdf or txt file
     const handleDownloadNotepad = () => {
         setDownloadNotepadType(!downloadNotepadType)
     }
