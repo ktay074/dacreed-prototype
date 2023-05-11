@@ -11,6 +11,7 @@ export const coursePreferenceRouter = createTRPCRouter({
         simplicityPref: z.array(z.number()),
         humourPref: z.array(z.number()),
         professionalismPref: z.array(z.number()),
+        documentId: z.string(),
      })
   )
   .mutation(async ({ ctx, input }) => {
@@ -18,7 +19,8 @@ export const coursePreferenceRouter = createTRPCRouter({
       data: {
         simplicityPref: { set: input.simplicityPref },
         humourPref: { set: input.humourPref },
-        proffesionalismPref: { set: input.professionalismPref },
+        professionalismPref: { set: input.professionalismPref },
+        documentId: input.documentId,
      },
     });
 

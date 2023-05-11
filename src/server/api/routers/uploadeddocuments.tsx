@@ -28,6 +28,7 @@ export const documentRouter = createTRPCRouter({
         org_content: z.string(),
         org_type: z.string(),
         org_name: z.string(),
+        org_size: z.number(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -35,7 +36,8 @@ export const documentRouter = createTRPCRouter({
         data: {
           org_content: input.org_content,
           org_name: input.org_name,
-          org_type: input.org_type
+          org_type: input.org_type,
+          org_size: input.org_size
         },
       });
 

@@ -2,8 +2,6 @@ import Link from 'next/link';
 import Slider from '~/components/slider';
 import { api } from "~/utils/api";
 import { useState } from 'react';
-import Image from "next/image";
-import background from "~/images/uploadbackground.svg"
 
 
 export default function UploadPage() {
@@ -14,12 +12,14 @@ const [simplicityPreference, setSimplicityPreference] = useState([1])
 const [org_name, setOrg_name] = useState("")
 const [org_type, setOrg_type] = useState("")
 const [org_content, setOrg_content] = useState("")
+const [documentId, setDocumentId] = useState("")
+const [fileSize, setFileSize] = useState(0)
 
 const ctx = api.useContext();
 
 
 //call API to save the preferences to DB
-const {mutate} = api.preferences.create.useMutation({
+const createPreferencesMutation = api.preferences.create.useMutation({
   onSuccess: () => {
     void ctx.courses.getAll.invalidate();
   }
@@ -44,8 +44,10 @@ const handleProfessionalismChange = (newProffesionalismValue: number[]) => {
 
 const handleGenerateCourse = () => {
   // Call the mutate function to trigger the mutation
-  createDocumentMutation.mutate({ org_content: org_content, org_name: org_name, org_type: org_type });
-console.log("Mutaion info", createDocumentMutation)
+  createDocumentMutation.mutate({ org_content: org_content, org_name: org_name, org_type: org_type, org_size: fileSize});
+  createPreferencesMutation.mutate({ documentId: documentId, simplicityPref: simplicityPreference, humourPref: humourPreference, professionalismPref: professionalPreference})
+  console.log("document mutaion info", createDocumentMutation)
+  console.log("preference mutaion info", createPreferencesMutation)
 };
 
 // const handleSavePreferences = () => {
@@ -76,7 +78,9 @@ const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
 
 droppedFiles.forEach((file) => {
   setOrg_type(file.type);
+  setDocumentId(file.name);
   setOrg_name(file.name);
+  setFileSize(file.size);
   console.log(file.name);
 });
 
@@ -113,13 +117,16 @@ droppedFiles.forEach((file) => {
     <div className=' sm:my-10 md:mx-32 '>
       <div className='flex' >
         <div 
-        className="m-10 bg-indigo-500 rounded-3xl text-slate-100  flex flex-col justify-center items-center w-2/4"
+        className="m-10 bg-indigo-200 rounded-3xl text-indigo-700  flex flex-col justify-center items-center w-2/4"
         onDrop={handleDrop} 
         onDragOver={(e)=>e.preventDefault()}
         > {droppedFiles.length === 0 ? (
-          <div className="text-center">
-            <p className='mb-5 text-xl'>Drag and drop files here</p>
-            <p className='text-2xl underline'>Click to Upload</p>
+          <div className="text-center font-semibold">
+            <p className='mb-5 text-xl '>Drag and drop files here</p>
+            <button 
+            className='text-2xl underline'
+            
+            >Click to Upload</button>
             <p className='text-base underline pt-10'>How to?</p>
             </div>
         ) : (
@@ -149,10 +156,6 @@ droppedFiles.forEach((file) => {
             >Generate</button>
            </Link>
 
-            <button 
-            className='text-2xl text-slate-100 bg-indigo-700 rounded-3xl px-4 py-2 mt-5 w-2/4 self-end'
-            onClick={() => mutate({ simplicityPref: simplicityPreference, humourPref: humourPreference, professionalismPref: professionalPreference})}
-            >Save Preferences</button>
             <div className='w-full bg-red-200'></div>
             </div>
         </div>

@@ -17,14 +17,24 @@ model Post {
 }
 
 model Document {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  org_content   String
-  org_name String
-  org_type String
-  authorId  String   @default("authorId")
-
+  id           String      @id @default(cuid())
+  createdAt    DateTime    @default(now())
+  org_content  String
+  org_name     String
+  org_type     String
+  org_size     Int
+  authorId     String      @default("authorId")
+  coursePref   CoursePref?
   @@index([authorId])
+}
+
+model CoursePref {
+  id                  String    @id @default(cuid())
+  simplicityPref      Int[]     @default([])
+  humourPref          Int[]     @default([])
+  professionalismPref Int[]     @default([])
+  documentId          String @unique
+  document            Document  @relation(fields: [documentId], references: [id])
 }
 
 model User {
@@ -70,12 +80,7 @@ model LearningPref {
   Node   Node   @relation(fields: [nodeId], references: [id])
 }
 
-model CoursePref {
-  id                  String @id @default(cuid())
-  simplicityPref      Int[]  @default([])
-  humourPref          Int[]  @default([])
-  proffesionalismPref Int[]  @default([])
-}
+
 
 model Events {
   id           String @id
