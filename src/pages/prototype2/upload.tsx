@@ -71,12 +71,13 @@ const handleGenerateCourse = () => {
 
 const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
   e.preventDefault();
-  const files = e.dataTransfer.files;
+  console.log("Drop", e.dataTransfer.files)
+  const files = Array.from(e.dataTransfer.files)
 
   // Set the dropped files to state
-  setDroppedFiles(Array.from(files));
+  setDroppedFiles(files);
 
-droppedFiles.forEach((file) => {
+files.forEach((file) => {
   setOrg_type(file.type);
   setDocumentId(file.name);
   setOrg_name(file.name);

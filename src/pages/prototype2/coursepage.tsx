@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     ChevronLeftIcon, 
     ChevronRightIcon} from '@heroicons/react/24/solid';
@@ -10,6 +10,35 @@ import { api } from "~/utils/api";
     import LeftMainMenu from '~/components/leftmainmenu'
     import Sections from '~/components/sections';
     import { LoadingPage } from "../../components/loading";
+
+    type CourseWithNodes = RouterOutputs["courses"]["getAll"];
+
+    const CourseView = (props: CourseWithNodes[number] & {courseTitle: (title: string) => void }) => {
+      const course = props;
+      const { courseTitle } = props;
+    
+      useEffect(() => {
+        if (course.title === "course 1") {
+          courseTitle(course.title);
+        }
+      });
+    
+      if (course.title === "course 1") {
+        return (
+          <div className="flex flex-col">
+            {course.nodes.map((node, index) => (
+              <div key={index}>
+                <div className="container">
+                  <Sections title={node.title} description={node.description} />
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      }
+    
+      return null;
+    };
 
 const CourseInfoPage: React.FC = () => {
   const [isLeftMenuOpen, setIsLeftMenuOpen] = useState(true);
@@ -23,30 +52,6 @@ const CourseInfoPage: React.FC = () => {
   const toggleRightMenu = () => {
     setIsRightMenuOpen(!isRightMenuOpen);
   };
-  type CourseWithNodes = RouterOutputs["courses"]["getAll"];
-
-  const CourseView = (props: CourseWithNodes[number]) => {
-    const course = props;
-  
-    if (course.title === "course 1") {
-      setCourseTitle(course.title);
-      return (
-        <div className="flex flex-col">
-          {course.nodes.map((node, index) => (
-            <div key={index}>
-              <div className="container">
-                <Sections title={node.title} description={node.description} />
-              </div>
-            </div>
-          ))}
-        </div>
-      );
-    }
-  
-    return null;
-  };
-  
-  
 
   const ShowCourse = () => {
     const {data, isLoading: coursesLoading} = api.courses.getAll.useQuery();
@@ -63,7 +68,7 @@ const CourseInfoPage: React.FC = () => {
     return (
         <div className="flex flex-col">
           {data.map((fullCourse) => fullCourse && (
-            <CourseView {...fullCourse} key={fullCourse.id} />
+            <CourseView {...fullCourse} key={fullCourse.id} courseTitle={setCourseTitle} />
           ))}
         </div>
       );
