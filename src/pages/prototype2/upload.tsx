@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Slider from '~/components/slider';
 import { api } from "~/utils/api";
 import { useState } from 'react';
+import LoadingPage from './loadingpage';
 
 
 export default function UploadPage() {
@@ -14,6 +15,7 @@ const [org_type, setOrg_type] = useState("")
 const [org_content, setOrg_content] = useState("")
 const [documentId, setDocumentId] = useState("")
 const [fileSize, setFileSize] = useState(0)
+const [isLoading, setIsLoading] = useState(true); 
 
 const ctx = api.useContext();
 
@@ -116,7 +118,10 @@ files.forEach((file) => {
 
   return (
     <div className=' sm:my-10 md:mx-32 '>
-      <div className='flex' >
+      {isLoading ? (
+  <LoadingPage/>
+) : (
+  <div className='flex uploadContent' >
         <div 
         className="m-10 bg-indigo-200 rounded-3xl text-indigo-700  flex flex-col justify-center items-center w-2/4"
         onDrop={handleDrop} 
@@ -161,7 +166,9 @@ files.forEach((file) => {
             </div>
         </div>
       </div>
-      <div className='flex w-full bg-indigo-700 justify-around h-20 items-center text-slate-100'>
+)}
+      
+      <footer className='flex w-full bg-indigo-700 justify-around h-20 items-center text-slate-100'>
         <div className='flex gap-3'>
             <div className='bg-indigo-400 px-4 py-2 rounded-full'>1</div>
             <div className='self-center'>Upload</div>
@@ -176,7 +183,7 @@ files.forEach((file) => {
             <div className='bg-indigo-200 px-4 py-2 rounded-full'>3</div>
             <div className='self-center'>Edit</div>
         </div>
-      </div>
+      </footer>
 
     </div>
   );
