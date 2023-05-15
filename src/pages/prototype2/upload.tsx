@@ -73,6 +73,7 @@ const handleGenerateCourse = () => {
 
 const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
   e.preventDefault();
+  setIsLoading(false);
   console.log("Drop", e.dataTransfer.files)
   const files = Array.from(e.dataTransfer.files)
 
