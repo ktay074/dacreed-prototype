@@ -3,7 +3,8 @@ import {
     InformationCircleIcon } from '@heroicons/react/24/solid';
 
 import { PrimaryButton} from '~/components/button'
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
+import type { StaticImageData } from 'next/image'
 
 import logo from "~/images/teamspluslogo.svg"
 
