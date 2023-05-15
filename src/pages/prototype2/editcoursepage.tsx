@@ -1,21 +1,21 @@
-import Quill from 'quill';
-import { useEffect } from 'react';
+// import Quill from 'quill';
+// import { useEffect } from 'react';
 
 const CourseEdit = () => {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const options = {
-        debug: 'info',
-        modules: {
-          toolbar: '#toolbar'
-        },
-        placeholder: 'Compose an epic...',
-        readOnly: true,
-        theme: 'snow'
-      };
-      const editor = new Quill('#editor', options);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     const options = {
+  //       debug: 'info',
+  //       modules: {
+  //         toolbar: '#toolbar'
+  //       },
+  //       placeholder: 'Compose an epic...',
+  //       readOnly: true,
+  //       theme: 'snow'
+  //     };
+  //     const editor = new Quill('#editor', options);
+  //   }
+  // }, []);
 
   return (
     <div>
