@@ -26,7 +26,7 @@ import { api } from "~/utils/api";
       if (course.title === "course 1") {
         return (
           <div className="flex flex-col">
-            {course.nodes.map((node, index) => (
+            {course.nodes.map((node: any, index:any) => (
               <div key={index}>
                 <div className="container">
                   <Sections title={node.title} description={node.description} />
@@ -67,7 +67,7 @@ const CourseInfoPage: React.FC = () => {
     console.log("course data" , data)
     return (
         <div className="flex flex-col">
-          {data.map((fullCourse) => fullCourse && (
+          {data.map((fullCourse: any) => fullCourse && (
             <CourseView {...fullCourse} key={fullCourse.id} courseTitle={setCourseTitle} />
           ))}
         </div>
