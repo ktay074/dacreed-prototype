@@ -1,4 +1,4 @@
-import Link from 'next/link';
+//import Link from 'next/link';
 import Slider from '~/components/slider';
 import { api } from "~/utils/api";
 import { useState } from 'react';
