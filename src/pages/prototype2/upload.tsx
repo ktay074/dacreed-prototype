@@ -15,7 +15,7 @@ const [org_type, setOrg_type] = useState("")
 const [org_content, setOrg_content] = useState("")
 const [documentId, setDocumentId] = useState("")
 const [fileSize, setFileSize] = useState(0)
-const [isLoading, setIsLoading] = useState(true); 
+const [isLoading, setIsLoading] = useState(false); 
 
 const ctx = api.useContext();
 
@@ -50,6 +50,7 @@ const handleGenerateCourse = () => {
   createPreferencesMutation.mutate({ documentId: documentId, simplicityPref: simplicityPreference, humourPref: humourPreference, professionalismPref: professionalPreference})
   console.log("document mutaion info", createDocumentMutation)
   console.log("preference mutaion info", createPreferencesMutation)
+  setIsLoading(true);
 };
 
 // const handleSavePreferences = () => {
@@ -73,7 +74,6 @@ const handleGenerateCourse = () => {
 
 const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
   e.preventDefault();
-  setIsLoading(false);
   console.log("Drop", e.dataTransfer.files)
   const files = Array.from(e.dataTransfer.files)
 
@@ -153,15 +153,11 @@ files.forEach((file) => {
             <Slider title={"Professionalism"} min={1} max={5} step={1} values={professionalPreference} onChange={handleProfessionalismChange}/>
             
             <div className='w-4/5 flex flex-col '>
-           <Link
-          href="/prototype2/coursepage"
-          >
             <button 
             className='text-2xl text-slate-100 bg-indigo-700 rounded-3xl px-4 py-2 mt-5 w-2/4 self-end'
             onClick={handleGenerateCourse}
             
             >Generate</button>
-           </Link>
 
             <div className='w-full bg-red-200'></div>
             </div>
