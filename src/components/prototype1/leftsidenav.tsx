@@ -7,6 +7,8 @@ import Reports from "../../images/prototype1/reportsicon-prototype1.png"
 import Image from "next/image"
 import React from "react"
 
+
+
 export default function LeftNavBar() {
     return (
       <div className="h-screen max-w-xs bg-[#DBCAFF] font-sans font-bold text-[#4E4E52]">
