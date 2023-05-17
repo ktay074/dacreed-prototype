@@ -23,9 +23,24 @@ export default function FileUpload () {
     // const handle
     // push preferences to the next page 
     // store preferences in database 
+    // extract text from file and send to API
+
+    const handleCreateCourse = () => {
+        console.log('Creating course..')
+
+        const proficiencyRating = localStorage.getItem('proficiency rating');
+        const compressRating = localStorage.getItem('compress rating');
+        const humorRating = localStorage.getItem('humor rating');
+        
+        console.log("Proficiency Rating:", proficiencyRating)
+        console.log("Compress Rating:", compressRating)
+        console.log("Humor Rating:", humorRating)
+
+    }
+
 
     return (
-        <div className="bg-[#F1F2FF]">
+        <div className="bg-[#F1F2FF] text-sans">
             <div className="flex">
                 <div className="flex-grow">
                     <LeftNavBar/>
@@ -54,7 +69,10 @@ export default function FileUpload () {
 
                                 {/* Create Course button */}
                                 <div>
-                                    <button className="text-black-500 rounded-2xl px-10 py-2 ml-40 mt-20 bg-yellow-400 hover:cursor-pointer" >Create Course</button>
+                                    <button className="text-black-500 font-bold font-sans rounded-2xl px-10 py-2 ml-40 mt-20 bg-yellow-400 hover:cursor-pointer" 
+                                    
+                                    onClick={handleCreateCourse}
+                                    >Create Course</button>
                                 </div>
                             </div>
                         </div>

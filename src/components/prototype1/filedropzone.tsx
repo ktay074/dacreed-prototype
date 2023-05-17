@@ -66,10 +66,10 @@ export default function FileDropzone () {
         {droppedFiles.length === 0 ? 
         (<FileUploadWindow></FileUploadWindow>) 
         : (
-          <ul className='flex flex-col text-lg text-black-300 align-middle rounded-xl border-2 items-center justify-center' style={{
+          <ul className='flex flex-col text-lg text-black-300 align-middle rounded-xl border-2 items-center justify-center bg-white' style={{
             boxShadow: "-2px 2px 2px 0px rgba(0,0,0,0.3)",
-            height: "28rem",
-            width: "28rem"
+            height: "501px",
+            width: "592px"
             }}>
             {droppedFiles.map((file) => (
               <li key={file.name}>{file.name}</li>
