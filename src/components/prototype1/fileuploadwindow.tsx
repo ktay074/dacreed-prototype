@@ -6,14 +6,14 @@ export default function FileUploadWindow() {
     return (
         <div>
             <div
-                className="flex h-full w-full flex-col items-center justify-center rounded-xl border-2"
+                className="flex h-full w-full flex-col items-center justify-center rounded-xl border-2 bg-white"
                 style={{
                 boxShadow: "-2px 2px 2px 0px rgba(0,0,0,0.3)",
-                height: "480px",
-                width: "480px"
+                height: "501px",
+                width: "592px"
                 }}
             >
-                <p className="text-lg text-black-300 p-10">To rewrite text, enter and paste it here or upload a doc and customise and press create course.</p>
+                <p className="text-lg text-black-300 p-10 mb-12">To rewrite text, enter and paste it here or upload a doc and customise and press create course.</p>
                  
                 <Image src={UploadIcon} alt="UploadIcon"></Image>
             </div>

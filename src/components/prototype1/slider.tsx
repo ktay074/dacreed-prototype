@@ -29,7 +29,7 @@ export default function Slider(props: SliderProps) {
             style={{
               ...props.style,
               height: '20px',
-              width: '100%',
+              width: '300px',
             }}
           >
             {children}

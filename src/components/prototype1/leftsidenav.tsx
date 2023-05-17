@@ -11,7 +11,7 @@ import React from "react"
 
 export default function LeftNavBar() {
     return (
-      <div className="h-screen max-w-xs bg-[#DBCAFF] font-sans font-bold text-[#4E4E52]">
+      <div className="flex flex-none h-screen max-w-xs bg-[#DBCAFF] font-sans font-bold text-[#4E4E52]">
         <div className="pt-40">
           <a href="" className="mb-8 flex pl-20">
             <Image className="mr-3" src={Profile} alt="Profile icon"></Image>
