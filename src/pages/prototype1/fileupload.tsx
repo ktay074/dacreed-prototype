@@ -49,7 +49,7 @@ export default function FileUpload() {
             </div>
             <div className="flex">
               {/* File Dropzone */}
-              <div className="mr-20">
+              <div className="">
                 <FileDropzone />
               </div>
               <div className="mt-15 ml-10">

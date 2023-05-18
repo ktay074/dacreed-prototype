@@ -6,7 +6,7 @@ import loadingGif from "../../images/prototype1/waveloading.gif";
 export default function LoadingPage() {
   const router = useRouter();
   setTimeout(() => {
-    router.push("/prototype1/fileupload");
+    router.push("/prototype1/courseeditor");
   }, 12000);
 
   return (
@@ -14,7 +14,7 @@ export default function LoadingPage() {
       <div className="flex-grow">
         <LeftNavBar></LeftNavBar>
       </div>
-      <div className="mr-80 bg-white">
+      <div className="mr-20 bg-white">
         <Image
           src={loadingGif}
           alt="loading"
