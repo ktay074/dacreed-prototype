@@ -7,37 +7,37 @@ import Reports from "../../images/prototype1/reportsicon-prototype1.png"
 import Image from "next/image"
 import React from "react"
 
-
+const DashboardLinks = [
+  { src: Profile, alt: "Profile Icon", text: "PROFILE"},
+  { src: Dashboard, alt: "Dashboard Icon", text: "DASHBOARD"},
+  { src: Company, alt: "Company Icon", text: "COMPANY"},
+  { src: Calendar, alt: "Calendar Icon", text: "CALENDAR"},
+  { src: Courses, alt: "Courses Icon", text: "COURSES"},
+  { src: Reports, alt: "Reports Icon", text: "REPORTS"},
+]  
 
 export default function LeftNavBar() {
-    return (
-      <div className="flex flex-none h-screen max-w-xs bg-[#DBCAFF] font-sans font-bold text-[#4E4E52]">
-        <div className="pt-40">
-          <a href="" className="mb-8 flex pl-20">
-            <Image className="mr-3" src={Profile} alt="Profile icon"></Image>
-            PROFILE
+  
+  
+  return (
+      <div className="flex flex-column h-screen max-w-xs bg-[#393DE3] font-sans font-bold text-[#F1F2FF]">
+        
+        {/* Dropdown menu admin toggle */}
+        
+        {/* User Avatar */}
+
+        {/* Dashboard links */}
+        <div>
+        {DashboardLinks.map((link, index) => (
+          <a key={index} className="flex mb-6 pl-20 cursor-pointer">
+              <Image src={link.src} alt={link.alt} className="mr-3"></Image>
+              {link.text}
           </a>
-          <a href="" className="mb-8 flex pl-20">
-            <Image className="mr-3" src={Dashboard} alt="Dashboard icon"></Image>
-            DASHBOARD
-          </a>
-          <a href="" className="mb-8 flex pl-20">
-            <Image className="mr-3" src={Company} alt="Company icon"></Image>
-            COMPANY
-          </a>
-          <a href="" className="mb-8 flex pl-20">
-            <Image className="mr-3" src={Calendar} alt="Calendar icon"></Image>
-            CALENDAR
-          </a>
-          <a href="" className="mb-8 flex pl-20">
-            <Image className="mr-3" src={Courses} alt="Courses icon"></Image>
-            COURSES
-          </a>
-          <a href="" className="mb-8 flex pl-20">
-            <Image className="mr-3" src={Reports} alt="Reports icon"></Image>
-            REPORTS
-          </a>
+        ))}
         </div>
+        
+        
+      
       </div>
     );
   }

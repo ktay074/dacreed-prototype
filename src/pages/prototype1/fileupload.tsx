@@ -6,6 +6,7 @@ import FileDropzone from "~/components/prototype1/filedropzone";
 import SearchBar from "~/components/prototype1/searchbar";
 import React, { useState, useEffect } from "react";
 import Slider from "~/components/prototype1/slider";
+import Link from "next/link";
 
 
 
@@ -42,17 +43,11 @@ export default function FileUpload () {
     return (
         <div className="bg-[#F1F2FF] text-sans">
             <div className="flex">
-              {/* File Dropzone */}
-              <div className="">
-                <FileDropzone />
-              </div>
-              <div className="mt-15 ml-10">
-                <div className="text-bold mb-20 text-5xl">
-                  Customise the course
-                </div>
-                <div className="flex-grow mr-40">
-                                        
-                    <div className="flex flex-col items-center">
+
+                    <div className="flex-grow">
+                    <LeftNavBar></LeftNavBar>
+                    </div>                                        
+                    <div className="flex flex-col items-center flex-grow mr-20">
 
                         <div className="mb-20">
                         <SearchBar></SearchBar>
@@ -74,10 +69,12 @@ export default function FileUpload () {
 
                                 {/* Create Course button */}
                                 <div>
+                                    <Link href={"./loadingpage"}>
                                     <button className="text-black-500 font-bold font-sans rounded-2xl px-10 py-2 ml-40 mt-20 bg-yellow-400 hover:cursor-pointer" 
                                     
                                     onClick={handleCreateCourse}
                                     >Create Course</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +83,7 @@ export default function FileUpload () {
                 </div>            
 
             </div>
-        </div>
-    </div>
+        
+    
     );
 }

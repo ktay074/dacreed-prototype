@@ -100,13 +100,12 @@ dayjs.extend(relativeTime);
 
 // Main home page 
 const Home: NextPage = () => {
-  const { isLoaded: userLoaded} = useUser();
+  
 
 
   // const getUser = api.findUser.getUser.useQuery(); 
   
-  if (!userLoaded) return <div/>
-
+  
   return (
     <>
       <Head>
