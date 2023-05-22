@@ -5,8 +5,11 @@ import loadingGif from "../../images/prototype1/waveloading.gif";
 
 export default function LoadingPage() {
   const router = useRouter();
-  setTimeout(() => {
-    router.push("/prototype1/courseeditor");
+  
+  // wrap in useEffect and have arrow function before setTimeout
+  // 
+  setTimeout(() => {  
+    void router.push("/prototype1/courseeditor");
   }, 12000);
 
   return (

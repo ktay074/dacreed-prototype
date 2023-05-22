@@ -1,6 +1,11 @@
-import contentContainer from "../../images/prototype1/content-container.png";
-import courseNavigation from "../../images/prototype1/course-navigation.png";
-import Image from "next/image";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box
+} from '@chakra-ui/react'
 
 export default function CourseEditor() {
   return (
@@ -11,19 +16,44 @@ export default function CourseEditor() {
         </h1>
       </div>
 
+
+      {/* course section components */}
       <div className="flex">
-        <Image
-          src={courseNavigation}
-          alt="courseNavigation"
-          className="hover:cursor-pointer"
-        ></Image>
-        <Image
-          src={contentContainer}
-          alt="contentContainer"
-          width={600}
-          height={700}
-          className="mx-10 my-40 items-center hover:cursor-pointer"
-        ></Image>
+      <Accordion>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex='1' textAlign='left'>
+                  Section 1 title
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+              commodo consequat.
+            </AccordionPanel>
+          </AccordionItem>
+
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex='1' textAlign='left'>
+                  Section 2 title
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+              commodo consequat.
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
       </div>
     </div>
   );

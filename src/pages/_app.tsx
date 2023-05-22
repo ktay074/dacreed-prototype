@@ -1,17 +1,18 @@
 import { type AppType } from "next/app";
-import { ClerkProvider } from "@clerk/nextjs";
-import { api } from "~/utils/api";
 import { ChakraProvider } from "@chakra-ui/react";
+import { api } from "~/utils/api";
+
 
 import "~/styles/globals.css";
+import { CacheProvider } from "@chakra-ui/next-js";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <ClerkProvider {...pageProps}>
+    <CacheProvider>
       <ChakraProvider>
         <Component {...pageProps} />
       </ChakraProvider>
-    </ClerkProvider>
+    </CacheProvider>
   );
 };
 
