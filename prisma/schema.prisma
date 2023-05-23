@@ -55,6 +55,8 @@ model Course {
   title     String
   duration  DateTime
   passValue Int      @default(80)
+  testId    Int?     @unique
+  Test      Test?    @relation(fields: [testId], references: [id])
   nodes     Node[]
   users     User[]   @relation("CourseToUser")
 
@@ -94,4 +96,27 @@ model Events {
   linkClicks   Int
   mouseMoveInt Int
   keyClicks    Int
+}
+
+model Answer {
+  id         Int      @id @default(autoincrement())
+  content    String
+  isCorrect  Boolean
+  questionId Int
+  Question   Question @relation(fields: [questionId], references: [id])
+}
+
+model Question {
+  id      Int      @id @default(autoincrement())
+  content String
+  testId  Int
+  Answer  Answer[]
+  Test    Test     @relation(fields: [testId], references: [id])
+}
+
+model Test {
+  id       Int        @id @default(autoincrement())
+  courseId Int        @unique
+  Course   Course?
+  Question Question[]
 }
