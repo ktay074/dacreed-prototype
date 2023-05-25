@@ -10,8 +10,10 @@ const Sections: React.FC<SectionsProps> = ({ title, description }) => {
     return(
         <div className="mr-80 mt-5 font-sans">
             <div className="bg-[#393DE3] px-8 py-4 flex">
+                <div className="mr-60">
                 <h3 className="text-[#ECECEC] mt-2">{title}</h3>
-                <div className="ml-60 flex">
+                </div>
+                <div className="justify-end items-end flex ml-80">
                     <button className="bg-[#FFF8ED] text-black rounded-lg mr-7 px-6 py-2 border-2 border-black">
                       <p>ADD CONTENT</p>  
                     </button>
@@ -25,4 +27,4 @@ const Sections: React.FC<SectionsProps> = ({ title, description }) => {
     )
 }
 
-export default Sections
+export default Sections            
