@@ -1,12 +1,12 @@
 import Image from "next/image";
 import MoreOptionsIcon from "../../images/prototype1/moreoptionsicon.png";
 
-interface SectionsProps {
+interface SectionsProp {
     title: string; 
     description: string; 
 }
 
-const Sections: React.FC<SectionsProps> = ({ title, description }) => {
+const Section: React.FC<SectionsProp> = ({ title, description }) => {
     return(
         <div className="mr-80 mt-5 font-sans">
             <div className="bg-[#393DE3] px-8 py-4 flex">
@@ -27,4 +27,4 @@ const Sections: React.FC<SectionsProps> = ({ title, description }) => {
     )
 }
 
-export default Sections            
+export default Section            
