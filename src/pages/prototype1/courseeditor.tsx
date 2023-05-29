@@ -1,14 +1,14 @@
 import LeftNavBar from "~/components/prototype1/leftsidenav";
 import { api } from "~/utils/api"; 
 import Section from "~/components/prototype1/coursesection";
-import type { RouterOutputs } from "~/utils/api";
-import { useEffect } from "react";
+import { useState } from "react";
 import { PrimaryButton, SecondaryButton } from "~/components/prototype1/buttons";
 import { ProficiencySelector, FormalitySelector } from "~/components/prototype1/preferenceselector";
+import QuestionSlider from "~/components/prototype1/questions-slider";
   
-const CoursesPage: React.FC = () => {
+const CourseEditorPage: React.FC = () => {
     
-    
+    const [questionsValue, setQuestionsValue] = useState([5]); 
     const retrieveCourses = api.courses.getAll.useQuery(); 
         
     if (retrieveCourses.data === undefined) {
@@ -28,20 +28,18 @@ const CoursesPage: React.FC = () => {
             </div>
 
             {/* Middle container */}
-            <div className="flex-grow flex-row">
+            <div className="w-full flex-row justify-center items-center">
+                
                 {/* Publish / Preview Buttons */}
-                <div className="flex mb-20 mt-10 mr-60 justify-end">
-                <div><PrimaryButton text="PUBLISH"></PrimaryButton></div>
-                <div><SecondaryButton text="PREVIEW"></SecondaryButton></div>
+                <div className="flex mb-20 mt-10 mr-80 justify-end">
+                    <div><PrimaryButton text="PUBLISH"></PrimaryButton></div>
+                    <div><SecondaryButton text="PREVIEW"></SecondaryButton></div>
                 </div>
 
 
                 {/* Course sections */}
-                <div className="ml-20 pb-20">
-                    {/* {retrieveCourses.map((fullCourse) => fullCourse)} */}
-                  
+                <div className="ml-20 pb-20 r">
                     {retrieveCourses.data.map((course, index) => (
-                    
                     <div key={index}>
                         {course.nodes.map((node) => (
                             <Section key={node.id} title={node.title} description={node.description}/>
@@ -49,29 +47,26 @@ const CoursesPage: React.FC = () => {
                     </div>)
 
                     )}
-
-                    {/* <Sections title={"Whistle blowing"} description="The purpose of this policy is to set out the processes by which suspected serious wrongdoing can be reported, within the framework of protection provided by the Protected Disclosures Act 2000.
-                    Reporting serious wrongdoing assists with managing risk (including health and safety risk), promotes openness and transparency and protects our business reputation." />
-
-                    <Sections title="Policy Statement" description="We encourage our staff to use the whistleblower process when they suspect serious wrongdoing. The business acknowledges that whistle-blowers or employees making internal disclosures may be concerned about reprisals, discrimination, harassment or retribution in making an internal disclosure. we are committed to minimizing those possibilities with the following:"/>
-
-                    <Sections title="Reporting under the policy" description="For the purposes of making a report under this Policy, matters may include, but are not limited to, any factual or suspected:
-                    " />
-
-                    <Sections title="Question 1" description="What are the discolours to which the Act applies?" /> */}
-
                 </div>
                 
             </div>
 
                 {/* Right Menu */}
-            <div className="bg-white flex-grow-[0.25] pl-40">
-                    <div>
+            <div className="bg-[#F6F2FF] flex-grow-[0.25] px-20 border-l-2 border-r-2">
+                    <div className="mt-20">
                     <ProficiencySelector/>    
                     </div>
 
                     <div className="mt-6">
                     <FormalitySelector/>
+                    </div>
+
+                    <div className="mt-10">
+                        <QuestionSlider title={"Questions"} min={0} max={10} step={1} values={questionsValue} onChange={setQuestionsValue}></QuestionSlider>
+                    </div>
+
+                    <div className="mt-40">
+                        <SecondaryButton text="REGENERATE"/>
                     </div>
             </div>
         </div>    
@@ -79,4 +74,4 @@ const CoursesPage: React.FC = () => {
     
   }
 
-export default CoursesPage
+export default CourseEditorPage
