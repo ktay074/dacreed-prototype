@@ -1,23 +1,41 @@
 import LeftNavBar from "~/components/prototype1/leftsidenav";
 import { api } from "~/utils/api"; 
 import Section from "~/components/prototype1/coursesection";
-import { useState } from "react";
+import React, { useState } from "react";
 import { PrimaryButton, SecondaryButton } from "~/components/prototype1/buttons";
 import { ProficiencySelector, FormalitySelector } from "~/components/prototype1/preferenceselector";
 import QuestionSlider from "~/components/prototype1/questions-slider";
-  
+import { title } from "process";
+
+
+
+
 const CourseEditorPage: React.FC = () => {
     
     const [questionsValue, setQuestionsValue] = useState([5]); 
     const retrieveCourses = api.courses.getAll.useQuery(); 
+    
+    
+    const ctx = api.useContext(); 
+    const updateNode = api.courses.updateNode.useMutation({
+    onSuccess: async () => {
+        await ctx.courses.getAll.invalidate(); 
+        // invalidates the fetching of the data so that the courses are fetched again after node is updated
+    }
+    })
+
+    const handleCourseNodePublish = (nodeId: string) => (title: string, description: string) => {
+    updateNode.mutate({ nodeId: nodeId, title: title, description: description })
+    }
+
+    
         
     if (retrieveCourses.data === undefined) {
         return <div className="ml-80 mt-80 justify-center items-center text-xl">loading..</div>
     }
           
-      
-    console.log(retrieveCourses.data)
-
+    
+    
     return (
         <div className="flex bg-[#F1F2FF]">
             {/* Left container */}
@@ -31,7 +49,7 @@ const CourseEditorPage: React.FC = () => {
             <div className="w-full flex-row justify-center items-center">
                 
                 {/* Publish / Preview Buttons */}
-                <div className="flex mb-20 mt-10 mr-80 justify-end">
+                <div className="flex mb-20 mt-10 mr-40 justify-end">
                     <div><PrimaryButton text="PUBLISH"></PrimaryButton></div>
                     <div><SecondaryButton text="PREVIEW"></SecondaryButton></div>
                 </div>
@@ -42,7 +60,7 @@ const CourseEditorPage: React.FC = () => {
                     {retrieveCourses.data.map((course, index) => (
                     <div key={index}>
                         {course.nodes.map((node) => (
-                            <Section key={node.id} title={node.title} description={node.description}/>
+                            <Section key={node.id} title={node.title} description={node.description} onPublish={handleCourseNodePublish(node.id)}/>
                         ))}
                     </div>)
 

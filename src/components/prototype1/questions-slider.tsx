@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Range } from 'react-range';
+import { Range, getTrackBackground } from 'react-range';
 
 type SliderProps = {
     title: string;
@@ -29,14 +29,21 @@ export default function QuestionSlider(props: SliderProps) {
           max={props.max}
           values={props.values}
           onChange={props.onChange}
-          renderTrack={({ props, children }) => (
+          renderTrack={({ props: renderTrackProps, children }) => (
             <div
-              className='rounded-3xl bg-yellow-500 max-w-md w-3/5'
-              {...props}
+              className='rounded-3xl bg-indigo-200 border-2 border-gray-400 max-w-md w-3/5'
+              {...renderTrackProps}
               style={{
-                ...props.style,
+                ...renderTrackProps.style,
                 height: '15px',
                 width: '100%',
+                background: getTrackBackground({
+                  colors: ["#FAC01E", "#ECF1F4"],
+                  values: props.values,
+                  min:props.min,
+                  max:props.max
+                  
+                })
               }}
             >
               {children}
@@ -44,7 +51,7 @@ export default function QuestionSlider(props: SliderProps) {
           )}
           renderThumb={({ props }) => (
             <div
-              className='bg-white border-2 border-gray-300 rounded-full'
+              className='bg-white border-2 border-gray-400 rounded-full'
               {...props}
               style={{
                 ...props.style,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Range } from 'react-range';
+import { Range, getTrackBackground } from 'react-range';
 
 type SliderProps = {
   title: string;
@@ -28,6 +28,7 @@ export default function Slider(props: SliderProps) {
               ...props.style,
               height: '20px',
               width: '100%',
+             
             }}
           >
             {children}
