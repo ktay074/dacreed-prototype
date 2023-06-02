@@ -4,9 +4,12 @@ import Calendar from "../../images/prototype1/calendaricon-midfi.png"
 import Courses from "../../images/prototype1/coursesicon-midfi.png"
 import Report from "../../images/prototype1/reporticon-midfi.png"
 import Review from "../../images/prototype1/reviewicon-midfi.png"
-
+import Logout from "../../images/prototype1/logouticon.png"
+import { UserAvatar } from "./useravatar"
+import Dropdown from "./dropdown"
 import Image from "next/image"
 import React from "react"
+
 
 const DashboardLinks = [
   { src: Dashboard, alt: "Dashboard Icon", text: "DASHBOARD"},
@@ -21,23 +24,29 @@ export default function LeftNavBar() {
   
   
   return (
-      <div className="flex flex-column h-full pr-20 bg-[#393DE3] font-sans font-bold text-[#F1F2FF]">
+      <div className=" h-full pt-5 px-10 bg-[#393DE3] font-sans font-bold text-[#F1F2FF]">
         
         {/* Dropdown menu admin toggle */}
-        
+        <Dropdown/>
         {/* User Avatar */}
+        <div className="pt-10">
+          <UserAvatar/>
+        </div>
 
         {/* Dashboard links */}
         <div className="pt-20">
         {DashboardLinks.map((link, index) => (
-          <a key={index} className="flex mb-6 pl-20 cursor-pointer">
+          <a key={index} className="flex mb-6 cursor-pointer">
               <Image src={link.src} alt={link.alt} className="mr-3"></Image>
               {link.text}
           </a>
         ))}
         </div>
         
-        
+        <div className="flex mt-60 cursor-pointer">
+          <Image src={Logout} alt="logout" className="mr-4"></Image>
+          <a className="underline">Logout</a>
+        </div>
       
       </div>
     );

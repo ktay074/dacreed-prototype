@@ -44,8 +44,11 @@ export default function FileUpload () {
         <div className="bg-[#F1F2FF] text-sans">
             <div className="flex">
 
-                    <div className="flex-grow">
-                    <LeftNavBar></LeftNavBar>
+                    <div className="">
+                        <div className="h-full">
+                            <LeftNavBar></LeftNavBar>
+
+                        </div>
                     </div>                                        
                     <div className="flex flex-col items-center flex-grow mr-20">
 

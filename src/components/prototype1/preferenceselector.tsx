@@ -59,7 +59,7 @@ const FormalitySelector: React.FC<SelectorProps> = () => {
             <div className='flex justify-center items-center'>
                 <h5 className='ml-4 mb-2'>Formality</h5>
             </div>
-            <div className='justify-center items-center'> 
+            <div className=''> 
                 {FormalityOptions.map((option) => (
                     <button 
                     key={option.alt}

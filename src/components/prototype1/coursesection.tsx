@@ -71,8 +71,9 @@ const Section: React.FC<SectionsProp> = ({ title, description, onPublish }) => {
                             <p>SAVE CONTENT</p>  
                         </button>) 
                         :      
-                        (<button onClick={handleEditButtonClick} className="bg-[#FFF8ED] text-black rounded-lg mr-7 px-6 py-2 border-2 border-black">
-                            <p>ADD CONTENT</p>  
+                        (<button onClick={handleEditButtonClick} className="flex space-x-2 bg-[#FFF8ED] text-black rounded-lg mr-7 px-6 py-2 border-2 border-black">
+                            <p>EDIT CONTENT</p>
+                            <Image src={EditingIcon} alt="editing icon"></Image>  
                         </button> 
                     )}
                     <button className="bg-[#FFF8ED] rounded-lg p-2 border-2 border-black"><Image src={MoreOptionsIcon} alt="more options"></Image></button>
@@ -87,7 +88,6 @@ const Section: React.FC<SectionsProp> = ({ title, description, onPublish }) => {
                     <p dangerouslySetInnerHTML={{ __html: editableDescription}}></p>
 
                 )}
-                <button><Image src={EditingIcon} alt="editing icon"></Image></button>
             </div>
         </div>
     )
