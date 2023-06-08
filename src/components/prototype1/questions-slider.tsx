@@ -31,7 +31,7 @@ export default function QuestionSlider(props: SliderProps) {
           onChange={props.onChange}
           renderTrack={({ props: renderTrackProps, children }) => (
             <div
-              className='rounded-3xl bg-indigo-200 border-2 border-gray-400 max-w-md w-3/5'
+              className='rounded-3xl bg-indigo-200 border-2 border-gray-300 max-w-md w-3/5'
               {...renderTrackProps}
               style={{
                 ...renderTrackProps.style,

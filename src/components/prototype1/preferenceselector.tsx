@@ -29,9 +29,9 @@ const ProficiencySelector: React.FC<SelectorProps> = () => {
     return (
         <div className='border-2 border-[#DBCAFF] rounded-lg px-2 py-4'>
             <div>
-                <h5 className='ml-4 mb-2 font-sans font-bold'>Proficiency</h5>
+                <h5 className='flex justify-center items-center font-sans font-bold mb-4 '>Proficiency</h5>
             </div>
-            <div>
+            <div className='flex flex-col'>
                 {ProficiencyOptions.map((option) => (
                     <button 
                     key={option.alt}
@@ -56,10 +56,10 @@ const FormalitySelector: React.FC<SelectorProps> = () => {
 
     return (
         <div className='border-2 border-[#DBCAFF] rounded-lg px-2 py-4'>
-            <div className='flex justify-center items-center'>
-                <h5 className='ml-4 mb-2'>Formality</h5>
+            <div className=''>
+                <h5 className='flex justify-center items-center mb-4 font-bold'>Formality</h5>
             </div>
-            <div className=''> 
+            <div className='flex flex-col'> 
                 {FormalityOptions.map((option) => (
                     <button 
                     key={option.alt}

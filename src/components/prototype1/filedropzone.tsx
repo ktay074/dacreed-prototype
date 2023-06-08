@@ -40,22 +40,26 @@ export default function FileDropzone () {
           setOrg_content(fileContent as string); // Do something with the file content
         };
         
+        let result = null
+
         if (file?.type === "application/msword" || file?.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
           // Word document
-          reader.readAsArrayBuffer(file);
+          result = reader.readAsArrayBuffer(file);
         } else if (file?.type.startsWith("image/")) {
           // Image file
           const fileUrl = URL.createObjectURL(file);
           const img = document.createElement("img");
           img.src = fileUrl;
           document.body.appendChild(img);
-          reader.readAsDataURL(file);
+          result = reader.readAsDataURL(file);
         } else if (file?.type.startsWith("text/")) {
           // Text file
-          reader.readAsText(file);
+          result = reader.readAsText(file);
+
         } else {
           console.log(`Unsupported file type: ${file ? file.type : 'undefined'}`);
         }
+        console.log(result)
       }
     }
 

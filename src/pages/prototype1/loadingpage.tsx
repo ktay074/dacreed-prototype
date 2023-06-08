@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import LeftNavBar from "~/components/prototype1/leftsidenav";
 import Image from "next/image";
-import loadingGif from "../../images/prototype1/waveloading.gif";
+import loadingGif from "../../images/prototype1/newwaveloading.gif";
 
 export default function LoadingPage() {
   const router = useRouter();
@@ -13,18 +12,13 @@ export default function LoadingPage() {
   }, 12000);
 
   return (
-    <div className="flex items-center">
-      <div className="flex-grow">
-        <LeftNavBar></LeftNavBar>
-      </div>
-      <div className="mr-20 bg-white">
+    <div className="fixed items-center justify-center bg-[#1B1C46]">
         <Image
           src={loadingGif}
           alt="loading"
-          width={1000}
-          height={1000}
-        ></Image>
-      </div>
+          width={1300}
+          height={1300}
+        />
     </div>
   );
 }

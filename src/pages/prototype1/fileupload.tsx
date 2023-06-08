@@ -41,16 +41,15 @@ export default function FileUpload () {
 
 
     return (
-        <div className="bg-[#F1F2FF] text-sans">
-            <div className="flex">
+        <div className="bg-[#F1F2FF] text-sans flex">
 
                     <div className="">
-                        <div className="h-full">
-                            <LeftNavBar></LeftNavBar>
+                        
+                        <LeftNavBar></LeftNavBar>
 
-                        </div>
+                        
                     </div>                                        
-                    <div className="flex flex-col items-center flex-grow mr-20">
+                    <div className="flex flex-col items-center ml-40">
 
                         <div className="mb-20">
                         <SearchBar></SearchBar>
@@ -82,10 +81,8 @@ export default function FileUpload () {
                             </div>
                         </div>
                     </div>
-            
-                </div>            
+        </div>            
 
-            </div>
         
     
     );

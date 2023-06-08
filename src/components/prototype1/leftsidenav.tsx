@@ -24,7 +24,7 @@ export default function LeftNavBar() {
   
   
   return (
-      <div className=" h-full pt-5 px-10 bg-[#393DE3] font-sans font-bold text-[#F1F2FF]">
+      <div className="h-full pt-10 pb-40 px-10 bg-[#393DE3] font-sans font-bold text-[#F1F2FF]">
         
         {/* Dropdown menu admin toggle */}
         <Dropdown/>

@@ -1,11 +1,12 @@
 import LeftNavBar from "~/components/prototype1/leftsidenav";
 import { api } from "~/utils/api"; 
 import Section from "~/components/prototype1/coursesection";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { PrimaryButton, SecondaryButton } from "~/components/prototype1/buttons";
 import { ProficiencySelector, FormalitySelector } from "~/components/prototype1/preferenceselector";
 import QuestionSlider from "~/components/prototype1/questions-slider";
-import { title } from "process";
+import SectionModal from "~/components/prototype1/coursesectionmodal";
+import UserContext from '~/pages/usercontext';
 
 
 
@@ -14,7 +15,7 @@ const CourseEditorPage: React.FC = () => {
     
     const [questionsValue, setQuestionsValue] = useState([5]); 
     const retrieveCourses = api.courses.getAll.useQuery(); 
-    
+    const { userContext, setUserContext } = useContext(UserContext)
     
     const ctx = api.useContext(); 
     const updateNode = api.courses.updateNode.useMutation({
@@ -49,10 +50,25 @@ const CourseEditorPage: React.FC = () => {
             <div className="w-full flex-row justify-center items-center">
                 
                 {/* Publish / Preview Buttons */}
-                <div className="flex mb-20 mt-10 mr-40 justify-end">
-                    <div><PrimaryButton text="PUBLISH"></PrimaryButton></div>
-                    <div><SecondaryButton text="PREVIEW"></SecondaryButton></div>
-                </div>
+                {userContext === "Administrator" && (
+                      <div className="flex mb-20 mt-10 mr-20 justify-end">
+                      <div><PrimaryButton text="PUBLISH"></PrimaryButton></div>
+  
+                      <div>
+                          
+                          <SecondaryButton text="PREVIEW"></SecondaryButton>
+                          
+                      </div>
+                      {/* <div>
+                          <SectionModal>
+                              <SecondaryButton text="PREVIEW"></SecondaryButton>
+                          </SectionModal>
+                          
+                      </div> */}
+                  </div>
+                )}
+
+              
 
 
                 {/* Course sections */}
@@ -63,14 +79,13 @@ const CourseEditorPage: React.FC = () => {
                             <Section key={node.id} title={node.title} description={node.description} onPublish={handleCourseNodePublish(node.id)}/>
                         ))}
                     </div>)
-
                     )}
                 </div>
                 
             </div>
 
                 {/* Right Menu */}
-            <div className="bg-[#F6F2FF] flex-grow-[0.25] px-20 border-l-2 border-r-2">
+            <div className="bg-[#F6F2FF] px-20 border-l-2 border-r-2">
                     <div className="mt-20">
                     <ProficiencySelector/>    
                     </div>

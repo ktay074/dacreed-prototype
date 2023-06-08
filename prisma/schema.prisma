@@ -23,10 +23,13 @@ model Document {
   org_name    String
   org_type    String
   org_size    Int
-  authorId    String      @default("authorId")
+  username    String
+  courseId    Int?        @unique
+  Course      Course?
   coursePref  CoursePref?
+  User        User        @relation(fields: [username], references: [username])
 
-  @@index([authorId])
+  @@index([username])
 }
 
 model CoursePref {
@@ -36,29 +39,34 @@ model CoursePref {
   documentId          String   @unique
   professionalismPref Int[]    @default([])
   document            Document @relation(fields: [documentId], references: [id])
+
+  @@index([documentId])
 }
 
 model User {
-  id        String   @id
-  createdAt DateTime @default(now())
-  username  String
-  courses   Course[] @relation("CourseToUser")
+  id        String     @id
+  createdAt DateTime   @default(now())
+  username  String     @unique
+  Document  Document[]
+  courses   Course[]   @relation("CourseToUser")
 
-  @@index([id])
+  @@index([username])
 }
 
 model Course {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  authorId  String
-  title     String
-  duration  DateTime
-  passValue Int      @default(80)
-  testId    Int?     @unique
-  Test      Test?    @relation(fields: [testId], references: [id])
-  nodes     Node[]
-  users     User[]   @relation("CourseToUser")
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now())
+  authorId   String
+  title      String
+  duration   DateTime
+  passValue  Int       @default(80)
+  documentId String?   @unique
+  testId     Int?      @unique
+  Document   Document? @relation(fields: [documentId], references: [id])
+  nodes      Node[]
+  Test       Test?
+  users      User[]    @relation("CourseToUser")
 
   @@index([title])
 }
@@ -116,7 +124,9 @@ model Question {
 
 model Test {
   id       Int        @id @default(autoincrement())
-  courseId Int        @unique
-  Course   Course?
+  courseId String     @unique
   Question Question[]
+  Course   Course     @relation(fields: [courseId], references: [id])
+
+  @@index([courseId])
 }
