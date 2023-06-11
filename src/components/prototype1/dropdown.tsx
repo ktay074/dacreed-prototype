@@ -6,8 +6,6 @@ import UserContext from '~/pages/usercontext';
 const Dropdown: React.FC = () => {
     
     const { userContext, setUserContext } = useContext(UserContext)
-    
-
     const [isExpanded, setIsExpanded] = useState(false); 
     // const [selectedOption, setSelectedOption] = useState('');     
 
@@ -19,7 +17,7 @@ const Dropdown: React.FC = () => {
     return (
         <div>
             <button onClick={() => setIsExpanded(true)}
-                className="flex items-center text-[#1B1C46] bg-[#FFF8ED] px-2 py-2 rounded-lg">
+                className="flex items-center text-[#1B1C46] border-2 border-black-500 bg-[#FFF8ED] px-2 py-2 rounded-lg">
                 {userContext || "Pick View Type"}
 
                 <Image src={DropdownIcon} alt='Dropdown Icon' height={12} width={8} className='ml-4'></Image>

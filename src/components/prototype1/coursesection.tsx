@@ -59,9 +59,9 @@ const Section: React.FC<SectionsProp> = ({ title, description, onPublish }) => {
       
     return(
         <div className="mx-10 px-10 mt-10 font-sans ">
-            <div className="bg-[#393DE3] px-8 py-4 flex space-x-60">
+            <div className="bg-[#393DE3] px-8 py-4 flex space-x-60 items-center">
 
-                <div className="justify-items-start">
+                <div className="justify-start">
                     {editingState ? (
                     <ReactQuillEditor value={editableTitle} onChange={handleTitleChange} modules={{ toolbar: titleToolbar}}/>
                     ): (
@@ -72,16 +72,16 @@ const Section: React.FC<SectionsProp> = ({ title, description, onPublish }) => {
                 </div>
 
 
-                <div className="justify-items-end  flex">
+                <div className="justify-end  flex">
                     
                     {userContext === "Administrator" && (
                         <>
                         {editingState ? (
-                            <button onClick={handleSaveButtonClick} className="bg-[#FFF8ED] text-black rounded-lg mr-7 px-6 py-2 border-2 border-black">
+                            <button onClick={handleSaveButtonClick} className="flex justify-center items-center bg-[#FFF8ED] text-black rounded-lg mr-7 px-6 py-2 border-2 border-black">
                                 <p>SAVE CONTENT</p>  
                             </button>) 
                             :      
-                            (<button onClick={handleEditButtonClick} className="flex space-x-2 bg-[#FFF8ED] text-black rounded-lg mr-7 px-6 py-2 border-2 border-black">
+                            (<button onClick={handleEditButtonClick} className="flex justify-center items-center space-x-2 bg-[#FFF8ED] text-black rounded-lg mr-7 px-6 py-2 border-2 border-black">
                                 <p>EDIT CONTENT</p>
                                 <Image src={EditingIcon} alt="editing icon"></Image>  
                             </button> 

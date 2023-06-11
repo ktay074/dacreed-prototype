@@ -36,7 +36,7 @@ const ProficiencySelector: React.FC<SelectorProps> = () => {
                     <button 
                     key={option.alt}
                     onClick={() => handleOptionClick(option.alt)}
-                    className={`${option.alt === selectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md' : 'px-4 py-2' }`}
+                    className={`${option.alt === selectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md' : 'px-4 py-2 hover:bg-[#D7D8F9] rounded-md' }`}
                     >
                         {option.text}
                     </button>
@@ -64,7 +64,7 @@ const FormalitySelector: React.FC<SelectorProps> = () => {
                     <button 
                     key={option.alt}
                     onClick={() => handleOptionClick(option.alt)}
-                    className={`${option.alt === selectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md' : 'px-4 py-2' }`}
+                    className={`${option.alt === selectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md' : 'px-4 py-2 hover:bg-[#D7D8F9] rounded-md' }`}
                     >
                         {option.text}
                     </button>

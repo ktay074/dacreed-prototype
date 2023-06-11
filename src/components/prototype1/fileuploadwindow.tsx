@@ -13,7 +13,7 @@ export default function FileUploadWindow() {
                 width: "592px"
                 }}
             >
-                <p className="text-lg text-black-300 p-10 mb-12">To rewrite text, enter and paste it here or upload a doc and customise and press create course.</p>
+                <p className="text-lg text-black-300 p-10 mb-12">Drag and drop file here</p>
                  
                 <Image src={UploadIcon} alt="UploadIcon"></Image>
             </div>

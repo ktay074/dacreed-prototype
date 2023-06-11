@@ -43,7 +43,7 @@ const Home: NextPage = () => {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <Link
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="/prototype1/fileupload"
+              href="/prototype1/creatordashboard"
               target="_blank"
             >
               <h2 className="text-2xl font-bold text-[white]">Prototype 1</h2>

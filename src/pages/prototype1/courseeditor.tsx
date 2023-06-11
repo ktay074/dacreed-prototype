@@ -3,7 +3,7 @@ import { api } from "~/utils/api";
 import Section from "~/components/prototype1/coursesection";
 import React, { useState, useContext } from "react";
 import { PrimaryButton, SecondaryButton } from "~/components/prototype1/buttons";
-import { ProficiencySelector, FormalitySelector } from "~/components/prototype1/preferenceselector";
+import { ProficiencySelector, FormalitySelector } from "~/components/prototype1/preferenceselector-columns";
 import QuestionSlider from "~/components/prototype1/questions-slider";
 import SectionModal from "~/components/prototype1/coursesectionmodal";
 import UserContext from '~/pages/usercontext';

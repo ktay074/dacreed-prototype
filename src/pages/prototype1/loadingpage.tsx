@@ -12,13 +12,16 @@ export default function LoadingPage() {
   }, 12000);
 
   return (
-    <div className="fixed items-center justify-center bg-[#1B1C46]">
-        <Image
-          src={loadingGif}
-          alt="loading"
-          width={1300}
-          height={1300}
-        />
+    <div className="w-full h-full bg-[#1B1C46]">
+        <div className="ml-40">
+
+          <Image
+            src={loadingGif}
+            alt="loading"
+            width={1300}
+            height={1300}
+          />
+        </div>
     </div>
   );
 }
