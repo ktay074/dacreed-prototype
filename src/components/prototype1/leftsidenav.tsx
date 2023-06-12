@@ -6,7 +6,7 @@ import Report from "../../images/prototype1/reporticon-midfi.png"
 import Review from "../../images/prototype1/reviewicon-midfi.png"
 import Logout from "../../images/prototype1/logouticon.png"
 import { UserAvatar } from "./useravatar"
-import Dropdown from "./dropdown"
+import { Dropdown } from "./dropdown"
 import Image from "next/image"
 import React from "react"
 
