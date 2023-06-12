@@ -24,9 +24,9 @@ model Document {
   org_type    String
   org_size    Int
   username    String
-  courseId    Int?        @unique
-  Course      Course?
+  courseId    String?     @unique
   coursePref  CoursePref?
+  Course      Course?     @relation(fields: [courseId], references: [id])
   User        User        @relation(fields: [username], references: [username])
 
   @@index([username])
@@ -34,10 +34,11 @@ model Document {
 
 model CoursePref {
   id                  String   @id @default(cuid())
-  simplicityPref      Int[]    @default([])
-  humourPref          Int[]    @default([])
   documentId          String   @unique
-  professionalismPref Int[]    @default([])
+  simplicityPref      Int      @default(0)
+  humourPref          Int      @default(0)
+  professionalismPref Int      @default(0)
+  creativityPref      Int      @default(0)
   document            Document @relation(fields: [documentId], references: [id])
 
   @@index([documentId])
@@ -61,9 +62,9 @@ model Course {
   title      String
   duration   DateTime
   passValue  Int       @default(80)
-  documentId String?   @unique
-  testId     Int?      @unique
-  Document   Document? @relation(fields: [documentId], references: [id])
+  documentId String?
+  testId     String?
+  Document   Document?
   nodes      Node[]
   Test       Test?
   users      User[]    @relation("CourseToUser")
