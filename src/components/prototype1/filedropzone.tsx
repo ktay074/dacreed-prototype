@@ -14,7 +14,7 @@ export default function FileDropzone() {
   const [documentId, setDocumentId] = useState("");
   const [fileSize, setFileSize] = useState(0);
 
-  const handleFileStorage = () => {};
+  // const handleFileStorage = () => {};
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();

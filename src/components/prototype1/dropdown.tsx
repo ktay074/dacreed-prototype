@@ -56,16 +56,29 @@ const DomainDropdown: React.FC = () => {
     { alt: "IT", text: "IT" },
   ];
 
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const handleSelection = () => {
+    setIsExpanded(false)
+  }
   return (
-    <div className="border-black-500 flex items-center rounded-lg border-2 bg-[#FFF8ED] px-2 py-2 text-[#1B1C46]">
-      <div>Pick Domain</div>
-      <Image
-        src={DropdownIcon}
-        alt="Dropdown Icon"
-        height={12}
-        width={8}
-        className="ml-4"
-      ></Image>
+    <div>
+      <div className="border-black-500 flex items-center rounded-lg border-2 bg-[#FFF8ED] px-2 py-2 text-[#1B1C46]">
+        <div>Pick Domain</div>
+        <Image
+          src={DropdownIcon}
+          alt="Dropdown Icon"
+          height={12}
+          width={8}
+          className="ml-4"
+        ></Image>
+      </div>
+      {isExpanded && (
+        <div>
+           
+
+        </div>
+      )}
     </div>
   );
 };
