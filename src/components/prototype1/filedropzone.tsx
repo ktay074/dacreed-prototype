@@ -9,7 +9,7 @@ export interface FileContent {
 }
 
 interface FileDropzoneProps { 
-  onFileChange(file: File): void
+  onFileChange?(file: File): void
 }
 
 export default function FileDropzone(props: FileDropzoneProps) {
@@ -29,7 +29,10 @@ export default function FileDropzone(props: FileDropzoneProps) {
     files.forEach((file) => {
       console.log(file.name);
       console.log(file.type);
-      props.onFileChange(file);
+      if (props.onFileChange !== undefined ) 
+      {  
+        props.onFileChange(file)
+      }
     });
 
     for (let i = 0; i < files.length; i++) {

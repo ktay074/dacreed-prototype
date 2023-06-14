@@ -46,9 +46,12 @@ const CreatorDashboardPage: React.FC = () => {
                     </Link>
                 </div>
                 <div className="flex space-x-6 mt-6">
-                    <CourseCard></CourseCard>
-                    <CourseCard></CourseCard>
-                    <CourseCard></CourseCard>
+                    {RetrieveUploadedCourses.data?.map(course => 
+                        <CourseCard 
+                        key={course.id} 
+                        file_name={course.file_name} 
+                        file_content={course.file_content}/>
+                    )}
                 </div>
             </div>
 
