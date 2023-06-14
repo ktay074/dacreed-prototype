@@ -15,7 +15,7 @@ interface FileDropzoneProps {
 export default function FileDropzone(props: FileDropzoneProps) {
   const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
   const [org_content, setOrg_content] = useState("");
-  const [fileSize, setFileSize] = useState(0);
+  
 
   
 

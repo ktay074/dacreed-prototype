@@ -5,6 +5,7 @@ import CourseCard from "~/components/prototype1/coursecard";
 import Link from "next/link";
 import Image from "next/image";
 import RecentActivity from "~/images/prototype1/recentactivity.png"
+import { api } from "~/utils/api";
 
 
 const CreatorDashboardPage: React.FC = () => {
@@ -15,6 +16,12 @@ const CreatorDashboardPage: React.FC = () => {
         {text: "ARCHIVED"}
     ]
     
+    const RetrieveUploadedCourses = api.uploadfile.getUploadedCourses.useQuery()
+
+    if (RetrieveUploadedCourses === null){
+        return <div>Loading Courses..</div>
+    } 
+
     return (
         <div className="flex bg-[#F1F2FF] space-x-10">
             <div>

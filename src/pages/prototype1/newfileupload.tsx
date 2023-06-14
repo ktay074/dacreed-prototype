@@ -27,7 +27,7 @@ export default function NewFileUpload () {
         // an id is generated using uuid
         const generatedId = uuidv4();
         createDocumentMutation.mutate (
-            {
+            {      
               id: generatedId, 
               file_name: storedFile.name,
               file_type: storedFile.type, 
@@ -39,6 +39,7 @@ export default function NewFileUpload () {
         console.log(await readFileContent(storedFile))
       }
 
+    // File gets stored by setStoredFile function  
     const onFileChange = (file: File) => {
         console.log(file)
         setStoredFile(file)
@@ -83,6 +84,7 @@ export default function NewFileUpload () {
     )
 }
 
+// asynchronously reads file content using FileReader 
 async function readFileContent(file: File) {
     return new Promise<string>((resolve) => {
       const fileReader = new FileReader();

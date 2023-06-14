@@ -5,7 +5,7 @@ import { documentRouter } from "./routers/uploadeddocuments";
 import { coursesRouter } from "./routers/courses";
 import { analyticsRouter } from "./routers/analytics";
 import { coursePreferenceRouter } from "./routers/coursepreferences";
-import { fileuploadRouter } from "./routers/fileupload";
+import { fileuploadRouter } from "./routers/fileuploadroute";
 
 /**
  * This is the primary router for your server.

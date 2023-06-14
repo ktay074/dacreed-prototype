@@ -6,8 +6,11 @@ import {
 
 export const fileuploadRouter = createTRPCRouter({
 
-    getAll: publicProcedure.query(async ({ ctx }) => {
-        const uploadedfiles = await ctx.prisma.uploadedFile.findMany(); 
+    getUploadedCourses: publicProcedure.query(async ({ ctx }) => {
+        const uploadedfiles = await ctx.prisma.uploadedFile.findMany({
+            take: 5, 
+            orderBy: [{ createdAt: "desc" }]
+        }); 
     
         return uploadedfiles
     }),
@@ -23,7 +26,7 @@ export const fileuploadRouter = createTRPCRouter({
                 file_size: z.number(), 
             })
         )
-        .mutation(async ({ ctx, input}) => {
+        .mutation(async ({ ctx, input }) => {
             const uploadedfile = await ctx.prisma.uploadedFile.create({
                 data: {
                     id: input.id,

@@ -2,6 +2,10 @@ import DefaultCoursePic from '../../images/prototype1/defaultcoursepic.png'
 import Image from 'next/image'
 import { SecondaryButton } from './buttons'
 
+interface CourseCardProps {
+    text: string; 
+} 
+
 const CourseCard: React.FC = () => {
 
     return (
