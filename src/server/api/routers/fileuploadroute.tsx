@@ -8,7 +8,7 @@ export const fileuploadRouter = createTRPCRouter({
 
     getUploadedCourses: publicProcedure.query(async ({ ctx }) => {
         const uploadedfiles = await ctx.prisma.uploadedFile.findMany({
-            take: 5, 
+            take: 3, 
             orderBy: [{ createdAt: "desc" }]
         }); 
     

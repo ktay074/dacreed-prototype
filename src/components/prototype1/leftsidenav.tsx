@@ -12,12 +12,12 @@ import React from "react"
 
 
 const DashboardLinks = [
-  { src: Dashboard, alt: "Dashboard Icon", text: "DASHBOARD"},
-  { src: Company, alt: "Company Icon", text: "COMPANY"},
-  { src: Calendar, alt: "Calendar Icon", text: "CALENDAR"},
-  { src: Courses, alt: "Courses Icon", text: "COURSES"},
-  { src: Report, alt: "Report Icon", text: "REPORT"},
-  { src: Review, alt: "Review Icon", text: "REVIEW"},
+  { src: Dashboard, alt: "Dashboard Icon", text: "DASHBOARD", href:"/prototype1/creatordashboard"},
+  { src: Company, alt: "Company Icon", text: "COMPANY", href:"/"},
+  { src: Calendar, alt: "Calendar Icon", text: "CALENDAR", href:"/"},
+  { src: Courses, alt: "Courses Icon", text: "COURSES", href:"/"},
+  { src: Report, alt: "Report Icon", text: "REPORT", href:"/"},
+  { src: Review, alt: "Review Icon", text: "REVIEW", href:"/"},
 ]  
 
 export default function LeftNavBar() {
@@ -36,14 +36,15 @@ export default function LeftNavBar() {
         {/* Dashboard links */}
         <div className="pt-10">
         {DashboardLinks.map((link, index) => (
-          <a key={index} className="flex mb-6 cursor-pointer hover:bg-slate-100 hover:text-[#393DE3]">
+          <a key={index} href={link.href} className="flex mb-6 cursor-pointer hover:bg-slate-100 hover:text-[#393DE3]">
+              
               <Image src={link.src} alt={link.alt} className="mr-3"></Image>
               {link.text}
           </a>
         ))}
         </div>
         
-        <div className="flex mt-60 cursor-pointer">
+        <div className="flex mt-60 cursor-pointer hover:text-[#d0d0d8]">
           <Image src={Logout} alt="logout" className="mr-4"></Image>
           <a className="underline">Logout</a>
         </div>

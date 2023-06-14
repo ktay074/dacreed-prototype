@@ -27,7 +27,7 @@ const ProficiencySelector: React.FC<SelectorProps> = () => {
     }
 
     return (
-        <div className='border-2 border-[#DBCAFF] rounded-lg px-2 py-4'>
+        <div className='border-2 border-[#DBCAFF] rounded-lg px-2 py-4 text-[#1B1C46]'>
             <div>
                 <h5 className='flex justify-center items-center font-sans font-bold mb-4 '>Proficiency</h5>
             </div>
@@ -36,7 +36,7 @@ const ProficiencySelector: React.FC<SelectorProps> = () => {
                     <button 
                     key={option.alt}
                     onClick={() => handleOptionClick(option.alt)}
-                    className={`${option.alt === selectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md' : 'px-4 py-2 hover:bg-[#D7D8F9] rounded-md' }`}
+                    className={`${option.alt === selectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md font-bold' : 'px-4 py-2 hover:bg-[#D7D8F9] font-bold rounded-md' }`}
                     >
                         {option.text}
                     </button>
@@ -55,7 +55,7 @@ const FormalitySelector: React.FC<SelectorProps> = () => {
     }
 
     return (
-        <div className='border-2 border-[#DBCAFF] rounded-lg px-2 py-4'>
+        <div className='border-2 border-[#DBCAFF] rounded-lg px-2 py-4 text-[#1B1C46]'>
             <div className=''>
                 <h5 className='flex justify-center items-center mb-4 font-bold'>Formality</h5>
             </div>
@@ -64,7 +64,7 @@ const FormalitySelector: React.FC<SelectorProps> = () => {
                     <button 
                     key={option.alt}
                     onClick={() => handleOptionClick(option.alt)}
-                    className={`${option.alt === selectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md' : 'px-4 py-2 hover:bg-[#D7D8F9] rounded-md' }`}
+                    className={`${option.alt === selectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md font-bold' : 'px-4 py-2 hover:bg-[#D7D8F9] font-bold rounded-md' }`}
                     >
                         {option.text}
                     </button>

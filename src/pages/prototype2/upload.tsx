@@ -46,7 +46,7 @@ const handleProfessionalismChange = (newProffesionalismValue: number[]) => {
 
 const handleGenerateCourse = () => {
   // Call the mutate function to trigger the mutation
-  createDocumentMutation.mutate({ org_content: org_content, org_name: org_name, org_type: org_type, org_size: fileSize});
+  createDocumentMutation.mutate({id:documentId, org_content: org_content, org_name: org_name, org_type: org_type, org_size: fileSize});
   createPreferencesMutation.mutate({ documentId: documentId, simplicityPref: simplicityPreference, humourPref: humourPreference, professionalismPref: professionalPreference})
   console.log("document mutaion info", createDocumentMutation)
   console.log("preference mutaion info", createPreferencesMutation)

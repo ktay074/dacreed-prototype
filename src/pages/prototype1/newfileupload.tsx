@@ -3,6 +3,7 @@ import LeftNavBar from "~/components/prototype1/leftsidenav";
 import FileDropzone from "~/components/prototype1/filedropzone";
 import SparkleIcon from "~/images/prototype1/sparkle-icon.png";
 import Image from "next/image";
+import Link from "next/link";
 import { ProficiencySelectorRow, FormalitySelectorRow, VisibilitySelectorRow} from "~/components/prototype1/preferenceselector-rows";
 import { PrimaryButton } from "~/components/prototype1/buttons";
 import { api } from "~/utils/api";
@@ -72,7 +73,9 @@ export default function NewFileUpload () {
                             Advanced Settings
                         </a>
                         <div className="flex justify-center items-center mt-10">
+                            <Link href={"./loadingpage"}>
                             <PrimaryButton text="GENERATE" onClick={handleGenerate}></PrimaryButton>
+                            </Link>
                         </div>
                     </div>
 
@@ -84,7 +87,7 @@ export default function NewFileUpload () {
     )
 }
 
-// asynchronously reads file content using FileReader 
+// asynchronously reads file content using FileReader and stores result as string
 async function readFileContent(file: File) {
     return new Promise<string>((resolve) => {
       const fileReader = new FileReader();

@@ -137,8 +137,8 @@ model UploadedFile {
   createdAt    DateTime @default(now())
   file_name    String
   file_content String
-  file_type    String
   file_size    Int
+  file_type    String
 
   @@index([id])
 }

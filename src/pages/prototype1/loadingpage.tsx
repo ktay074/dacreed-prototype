@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
-import loadingGif from "../../images/prototype1/newwaveloading.gif";
+import loadingGif from "../../images/prototype1/newwaveloading-cropped.gif";
 
 export default function LoadingPage() {
   const router = useRouter();
@@ -12,16 +12,16 @@ export default function LoadingPage() {
   }, 12000);
 
   return (
-    <div className="w-full h-full bg-[#1B1C46]">
-        <div className="ml-40">
+    <div className="bg-[#1B1C46] flex items-end justify-center">
+        
 
           <Image
             src={loadingGif}
             alt="loading"
-            width={1300}
-            height={1300}
+            width={1550}
+            height={1550}
           />
-        </div>
+        
     </div>
   );
 }
