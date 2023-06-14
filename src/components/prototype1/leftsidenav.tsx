@@ -34,7 +34,7 @@ export default function LeftNavBar() {
         </div>
 
         {/* Dashboard links */}
-        <div className="pt-20">
+        <div className="pt-10">
         {DashboardLinks.map((link, index) => (
           <a key={index} className="flex mb-6 cursor-pointer hover:bg-slate-100 hover:text-[#393DE3]">
               <Image src={link.src} alt={link.alt} className="mr-3"></Image>

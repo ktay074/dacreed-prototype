@@ -10,7 +10,7 @@ interface ButtonProps {
 const PrimaryButton = (props: ButtonProps) => {
     
     return (
-        <button className="mr-8 py-2 px-4 text-l border-2 border-[#898989] font-bold rounded-lg bg-[#FAC01E]">
+        <button onClick={props.onClick} className="mr-8 py-2 px-4 text-l border-2 border-[#898989] font-bold rounded-lg bg-[#FAC01E]">
             {props.text}
         </button>  
     ) 
@@ -18,7 +18,7 @@ const PrimaryButton = (props: ButtonProps) => {
 
 const SecondaryButton = (props: ButtonProps) => {
     return (
-        <button className="py-2 px-4 text-l border-2 border-[#898989] font-bold rounded-lg bg-[#FFF8ED]">
+        <button onClick={props.onClick} className="py-2 px-4 text-l border-2 border-[#898989] font-bold rounded-lg bg-[#FFF8ED]">
             {props.text}
         </button>
     )

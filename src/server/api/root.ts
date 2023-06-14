@@ -5,6 +5,7 @@ import { documentRouter } from "./routers/uploadeddocuments";
 import { coursesRouter } from "./routers/courses";
 import { analyticsRouter } from "./routers/analytics";
 import { coursePreferenceRouter } from "./routers/coursepreferences";
+import { fileuploadRouter } from "./routers/fileupload";
 
 /**
  * This is the primary router for your server.
@@ -17,7 +18,8 @@ export const appRouter = createTRPCRouter({
   document: documentRouter,
   courses: coursesRouter,
   preferences: coursePreferenceRouter,
-  analytics: analyticsRouter
+  analytics: analyticsRouter,
+  uploadfile: fileuploadRouter
 });
 
 // export type definition of API

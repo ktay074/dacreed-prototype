@@ -1,20 +1,23 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useState } from "react";
 import FileUploadWindow from "./fileuploadwindow";
+
 
 export interface FileContent {
   filename: string;
   rawtext: string;
 }
 
-export default function FileDropzone() {
+interface FileDropzoneProps { 
+  onFileChange(file: File): void
+}
+
+export default function FileDropzone(props: FileDropzoneProps) {
   const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
-  const [org_name, setOrg_name] = useState("");
-  const [org_type, setOrg_type] = useState("");
   const [org_content, setOrg_content] = useState("");
-  const [documentId, setDocumentId] = useState("");
   const [fileSize, setFileSize] = useState(0);
 
-  // const handleFileStorage = () => {};
+  
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -24,11 +27,9 @@ export default function FileDropzone() {
     setDroppedFiles(files);
 
     files.forEach((file) => {
-      setOrg_type(file.type);
-      setDocumentId(file.name);
-      setOrg_name(file.name);
-      setFileSize(file.size);
       console.log(file.name);
+      console.log(file.type);
+      props.onFileChange(file);
     });
 
     for (let i = 0; i < files.length; i++) {
@@ -42,14 +43,7 @@ export default function FileDropzone() {
 
       let result = null;
 
-      if (
-        file?.type === "application/msword" ||
-        file?.type ===
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-      ) {
-        // Word document
-        result = reader.readAsArrayBuffer(file);
-      } else if (file?.type.startsWith("text/")) {
+    if (file?.type.startsWith("text/")) {
         // Text file
         result = reader.readAsText(file);
       } else {
@@ -65,7 +59,7 @@ export default function FileDropzone() {
         <FileUploadWindow></FileUploadWindow>
       ) : (
         <ul
-          className="text-black-300 flex flex-col items-center justify-center rounded-xl border-2 bg-white align-middle text-lg"
+          className="text-black-300 flex flex-col items-center justify-center rounded-xl border-2 bg-[#FFF8ED] align-middle text-lg"
           style={{
             boxShadow: "-2px 2px 2px 0px rgba(0,0,0,0.3)",
             height: "501px",

@@ -25,19 +25,21 @@ export const documentRouter = createTRPCRouter({
   create: privateProcedure
     .input(
       z.object({
+        id: z.string(),
         org_content: z.string(),
         org_type: z.string(),
         org_name: z.string(),
-        org_size: z.number(),
+        org_size: z.number(),       
       })
     )
     .mutation(async ({ ctx, input }) => {
       const document = await ctx.prisma.document.create({
         data: {
+          id: input.id, 
           org_content: input.org_content,
           org_name: input.org_name,
           org_type: input.org_type,
-          org_size: input.org_size
+          org_size: input.org_size,           
         },
       });
 

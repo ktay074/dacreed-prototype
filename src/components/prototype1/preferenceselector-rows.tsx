@@ -35,9 +35,9 @@ const ProficiencySelectorRow: React.FC<SelectorProps> = () => {
     return (
         <div>
             <div>
-                <h3>Proficiency</h3>
+                <p className='ml-20 mb-2 text-[#1B1C46] font-semibold'>Proficiency</p>
             </div>
-            <div className='flex flex-row justify-center items-center rounded-lg bg-[#B0B1F4] text-[#1B1C46] font-semibold px-2 py-2'>
+            <div className='flex flex-row justify-center items-center rounded-lg bg-[#B0B1F4] text-[#1B1C46] font-bold px-2 py-2'>
                 {ProficiencyOptions.map((option) => (
                     <div 
                     key={option.alt}
@@ -64,9 +64,9 @@ const VisibilitySelectorRow: React.FC<SelectorProps> = () => {
     return (
         <div>
             <div>
-                <h3>Visibility</h3>
+                <p className='ml-20 mb-2 text-[#1B1C46] font-semibold'>Visibility</p>
             </div>
-            <div className='flex flex-row justify-center items-center rounded-lg bg-[#B0B1F4] text-[#1B1C46] font-semibold px-2 py-2'>
+            <div className='flex flex-row justify-center items-center rounded-lg bg-[#B0B1F4] text-[#1B1C46] font-bold px-2 py-2'>
                 {VisibilityOptions.map((option) => (
                     <div 
                     key={option.alt}
@@ -93,9 +93,9 @@ const FormalitySelectorRow: React.FC<SelectorProps> = () => {
     return (
         <div>
             <div>
-                <h3>Formality</h3>
+                <p className='ml-20 mb-2 text-[#1B1C46] font-semibold'>Formality</p>
             </div>
-            <div className='flex flex-row justify-center items-center rounded-lg bg-[#B0B1F4] text-[#1B1C46] font-semibold px-2 py-2'>
+            <div className='flex flex-row justify-center items-center rounded-lg bg-[#B0B1F4] text-[#1B1C46] font-bold px-2 py-2'>
                 {FormalityOptions.map((option) => (
                     <div 
                     key={option.alt}

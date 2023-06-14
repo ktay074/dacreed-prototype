@@ -131,3 +131,14 @@ model Test {
 
   @@index([courseId])
 }
+
+model UploadedFile {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  file_name    String
+  file_content String
+  file_type    String
+  file_size    Int
+
+  @@index([id])
+}

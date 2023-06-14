@@ -75,6 +75,14 @@ const DomainDropdown: React.FC = () => {
       </div>
       {isExpanded && (
         <div>
+        {DomainTypes.map((option) => (
+          <div
+          key={option.alt}
+          onClick={() => handleSelection}
+          >
+
+          </div>
+        ))}
            
 
         </div>

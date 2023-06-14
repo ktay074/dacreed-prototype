@@ -3,6 +3,8 @@ import SearchBar from "~/components/prototype1/searchbar";
 import { PrimaryButton } from "~/components/prototype1/buttons";
 import CourseCard from "~/components/prototype1/coursecard";
 import Link from "next/link";
+import Image from "next/image";
+import RecentActivity from "~/images/prototype1/recentactivity.png"
 
 
 const CreatorDashboardPage: React.FC = () => {
@@ -14,10 +16,9 @@ const CreatorDashboardPage: React.FC = () => {
     ]
     
     return (
-        <div className="flex bg-[#F1F2FF]">
+        <div className="flex bg-[#F1F2FF] space-x-10">
             <div>
-            <LeftNavBar/>
-
+                <LeftNavBar/>
             </div>
 
             
@@ -33,18 +34,20 @@ const CreatorDashboardPage: React.FC = () => {
                     </div>
                 </div>
                 <div className="py-6 flex justify-end items-center">
-                    <Link href={"./fileupload"}>
+                    <Link href={"./newfileupload"}>
                         <PrimaryButton text="CREATE NEW"></PrimaryButton>
                     </Link>
                 </div>
-                <div className="flex space-x-6">
+                <div className="flex space-x-6 mt-6">
                     <CourseCard></CourseCard>
                     <CourseCard></CourseCard>
                     <CourseCard></CourseCard>
                 </div>
             </div>
 
-            
+            <div className="bg-[#D7D8F9] items-center cursor-pointer">
+                <Image src={RecentActivity} alt="recent activity feed" className="pt-40 px-2"></Image>
+            </div>
         </div>
     )
 }

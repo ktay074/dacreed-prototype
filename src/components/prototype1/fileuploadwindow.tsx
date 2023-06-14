@@ -6,11 +6,11 @@ export default function FileUploadWindow() {
     return (
         <div>
             <div
-                className="flex h-full w-full flex-col items-center justify-center rounded-xl border-2 bg-white"
+                className="flex h-full w-full flex-col items-center justify-center rounded-xl border-2 bg-[#FFF8ED]"
                 style={{
                 boxShadow: "-2px 2px 2px 0px rgba(0,0,0,0.3)",
-                height: "501px",
-                width: "592px"
+                height: "601px",
+                width: "692px"
                 }}
             >
                 <p className="text-lg text-black-300 p-10 mb-12">Drag and drop file here</p>
