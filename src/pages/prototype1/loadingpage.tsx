@@ -9,7 +9,7 @@ export default function LoadingPage() {
   // 
   setTimeout(() => {  
     void router.push("/prototype1/courseeditor");
-  }, 12000);
+  }, 8000);
 
   return (
     <div className="bg-[#1B1C46] flex items-end justify-center">

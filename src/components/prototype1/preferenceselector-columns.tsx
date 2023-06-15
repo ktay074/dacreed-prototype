@@ -18,12 +18,11 @@ const FormalityOptions = [
     { alt:"Professional", text:"PROFESSIONAL" }
 ]
 
-const ProficiencySelector: React.FC<SelectorProps> = () => {
+const ProficiencySelector: React.FC<SelectorProps & {retrievedOption?: string}> = ({retrievedOption}) => {
 
-    const [selectedOption, setSelectedOption] = useState<string>(''); 
-
+    const [newSelectedOption, setNewSelectedOption] = useState<string>(retrievedOption || ""); 
     const handleOptionClick = (option: string) => {
-        setSelectedOption(option)
+        setNewSelectedOption(option)
     }
 
     return (
@@ -36,7 +35,7 @@ const ProficiencySelector: React.FC<SelectorProps> = () => {
                     <button 
                     key={option.alt}
                     onClick={() => handleOptionClick(option.alt)}
-                    className={`${option.alt === selectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md font-bold' : 'px-4 py-2 hover:bg-[#D7D8F9] font-bold rounded-md' }`}
+                    className={`${option.alt === newSelectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md font-bold' : 'px-4 py-2 hover:bg-[#D7D8F9] font-bold rounded-md' }`}
                     >
                         {option.text}
                     </button>
@@ -46,12 +45,11 @@ const ProficiencySelector: React.FC<SelectorProps> = () => {
     )
 }
 
-const FormalitySelector: React.FC<SelectorProps> = () => {
+const FormalitySelector: React.FC<SelectorProps & {retrievedOption?: string}> = ({ retrievedOption }) => {
 
-    const [selectedOption, setSelectedOption] = useState<string>(''); 
-
+    const [newSelectedOption, setNewSelectedOption] = useState<string>(retrievedOption || ""); 
     const handleOptionClick = (option: string) => {
-        setSelectedOption(option)
+        setNewSelectedOption(option)
     }
 
     return (
@@ -64,7 +62,7 @@ const FormalitySelector: React.FC<SelectorProps> = () => {
                     <button 
                     key={option.alt}
                     onClick={() => handleOptionClick(option.alt)}
-                    className={`${option.alt === selectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md font-bold' : 'px-4 py-2 hover:bg-[#D7D8F9] font-bold rounded-md' }`}
+                    className={`${option.alt === newSelectedOption ? 'px-4 py-2 bg-[#D7D8F9] rounded-md font-bold' : 'px-4 py-2 hover:bg-[#D7D8F9] font-bold rounded-md' }`}
                     >
                         {option.text}
                     </button>

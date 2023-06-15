@@ -24,12 +24,11 @@ const VisibilityOptions = [
     { alt:"INDIVIDUAL", text:"INDIVIDUAL" }
 ]   
 
-const ProficiencySelectorRow: React.FC<SelectorProps> = () => {
+const ProficiencySelectorRow: React.FC<SelectorProps & {selectedOption: string, onOptionClick: (option: string) => void}> = ({ selectedOption, onOptionClick}) => {
     
-    const [selectedOption, setSelectedOption] = useState<string>(''); 
-
     const handleOptionClick = (option: string) => {
-        setSelectedOption(option)
+        onOptionClick(option)
+        
     }
 
     return (
@@ -53,12 +52,10 @@ const ProficiencySelectorRow: React.FC<SelectorProps> = () => {
     )
 }
 
-const VisibilitySelectorRow: React.FC<SelectorProps> = () => {
+const VisibilitySelectorRow: React.FC<SelectorProps & {selectedOption: string, onOptionClick: (option: string) => void}> = ({ selectedOption, onOptionClick}) => {
     
-    const [selectedOption, setSelectedOption] = useState<string>(''); 
-
     const handleOptionClick = (option: string) => {
-        setSelectedOption(option)
+        onOptionClick(option)
     }
 
     return (
@@ -82,12 +79,11 @@ const VisibilitySelectorRow: React.FC<SelectorProps> = () => {
     )
 }
 
-const FormalitySelectorRow: React.FC<SelectorProps> = () => {
+const FormalitySelectorRow: React.FC<SelectorProps & {selectedOption: string, onOptionClick: (option: string) => void}> = ({ selectedOption, onOptionClick }) => {
     
-    const [selectedOption, setSelectedOption] = useState<string>(''); 
 
     const handleOptionClick = (option: string) => {
-        setSelectedOption(option)
+        onOptionClick(option)
     }
 
     return (

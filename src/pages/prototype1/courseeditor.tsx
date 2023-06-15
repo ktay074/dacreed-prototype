@@ -1,7 +1,7 @@
 import LeftNavBar from "~/components/prototype1/leftsidenav";
 import { api } from "~/utils/api"; 
 import Section from "~/components/prototype1/coursesection";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { PrimaryButton, SecondaryButton } from "~/components/prototype1/buttons";
 import { ProficiencySelector, FormalitySelector } from "~/components/prototype1/preferenceselector-columns";
 import QuestionSlider from "~/components/prototype1/questions-slider";
@@ -13,10 +13,25 @@ import UserContext from '~/pages/usercontext';
 
 const CourseEditorPage: React.FC = () => {
     
+    useEffect(() => {
+        const retrievedProficiencyOption = localStorage.getItem('proficiency')
+        const retrievedFormalityOption = localStorage.getItem('formality')
+
+        const checkedProficiencyValue = retrievedProficiencyOption || ""; 
+        const checkedFormalityValue = retrievedFormalityOption || "";
+
+        setStoredProficiencyOption(checkedProficiencyValue); 
+        setStoredFormalityOption(checkedFormalityValue);
+    }, [])
+    
     const [questionsValue, setQuestionsValue] = useState([5]); 
     const retrieveCourses = api.courses.getAll.useQuery(); 
     const { userContext, setUserContext } = useContext(UserContext)
+    const [storedProficiencyOption, setStoredProficiencyOption] = useState('') 
+    const [storedFormalityOption, setStoredFormalityOption] = useState('') 
     
+    
+
     const ctx = api.useContext(); 
     const updateNode = api.courses.updateNode.useMutation({
     onSuccess: async () => {
@@ -87,11 +102,11 @@ const CourseEditorPage: React.FC = () => {
                 {/* Right Menu */}
             <div className="bg-[#F6F2FF] px-20 border-l-2 border-r-2">
                     <div className="mt-20">
-                    <ProficiencySelector/>    
+                    <ProficiencySelector retrievedOption={storedProficiencyOption}/>    
                     </div>
 
                     <div className="mt-6">
-                    <FormalitySelector/>
+                    <FormalitySelector retrievedOption={storedFormalityOption}/>
                     </div>
 
                     <div className="mt-10">
