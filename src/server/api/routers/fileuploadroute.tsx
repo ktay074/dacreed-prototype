@@ -35,8 +35,18 @@ export const fileuploadRouter = createTRPCRouter({
                     file_type: input.file_type,
                     file_size: input.file_size
                 },
-            });
 
-            return uploadedfile
+
+            });
+            const fileContentLines = input.file_content.split('\n', 3)
+
+            const createCourse = await ctx.prisma.prototype1Course.create({
+                data: {
+                    title: fileContentLines [0]??"",                   
+                    description: fileContentLines [1]??""    
+                }
+            })
+            return uploadedfile 
         }),
+
 })

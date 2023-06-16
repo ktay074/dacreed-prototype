@@ -42,6 +42,12 @@ export default function NewFileUpload () {
         
         // an id is generated using uuid
         const generatedId = uuidv4();
+
+        const fileContent = await readFileContent(storedFile); 
+        // const separatedFileContents = separateContents(fileContent)
+
+
+
         createDocumentMutation.mutate (
             {      
               id: generatedId, 
@@ -58,6 +64,7 @@ export default function NewFileUpload () {
         localStorage.setItem("visibility", visibilityValue)
       }
 
+
     // File gets stored by setStoredFile function  
     const onFileChange = (file: File) => {
         console.log(file)
@@ -66,6 +73,8 @@ export default function NewFileUpload () {
     
     
 
+
+    
 
 
     return (
@@ -115,3 +124,9 @@ async function readFileContent(file: File) {
       fileReader.readAsText(file);
     });
   }
+
+//   separate contents of file using a split method
+function separateContents(fileContent: string) {
+    const separatedContents = fileContent.split('\n'); 
+    return separatedContents
+}

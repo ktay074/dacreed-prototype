@@ -142,3 +142,24 @@ model UploadedFile {
 
   @@index([id])
 }
+
+model Prototype1Course {
+  id          String           @id @default(cuid())
+  createdAt   DateTime         @default(now())
+  title       String
+  description String
+  nodes       Prototype1Node[]
+}
+
+model Prototype1Node {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  courseId    String
+  title       String
+  description String
+
+  course Prototype1Course @relation(fields: [courseId], references: [id])
+
+  @@index([title])
+}
